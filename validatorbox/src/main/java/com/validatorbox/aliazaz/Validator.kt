@@ -10,6 +10,7 @@ import android.widget.*
 import androidx.cardview.widget.CardView
 import com.aliazaz.validatorbox.R
 import com.edittextpicker.aliazaz.EditTextPicker
+import java.lang.reflect.Field
 
 class Validator {
 
@@ -292,7 +293,7 @@ class Validator {
                 continue
 
             if (view is CardView) {
-                if (!emptyCheckingContainer(context, view as ViewGroup)) {
+                if (!emptyCheckingContainer(context, view)) {
                     return false
                 }
             } else if (view is RadioGroup) {
@@ -358,7 +359,7 @@ class Validator {
                         return false
                     }
                 } else {
-                    if (!emptyCheckingContainer(context, view as ViewGroup)) {
+                    if (!emptyCheckingContainer(context, view)) {
                         return false
                     }
                 }
@@ -373,16 +374,40 @@ class Validator {
     }
 
     private fun getIDComponent(view: View): String {
-        val idName = view.resources.getResourceName(view.id).split("id/".toRegex())
-            .dropLastWhile { it.isEmpty() }
-            .toTypedArray()
-
-        return idName[1]
+        val idName = view.resources.getResourceName(view.id)?.split("id/".toRegex())
+            ?.dropLastWhile { it.isEmpty() }
+            ?.toTypedArray()
+        return idName?.get(1) ?: ""
     }
 
     private fun getString(context: Context, idName: String): String {
 
-        val fields = R.string::class.java.fields
+        val list: Array<out Field> = R.string::class.java.fields
+        val field: Field =
+            list.single { it -> it.name.split("R\$string.".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[0] == idName }
+        try {
+            val id = field.getInt(R.string::class.java) //id of string
+
+            return context.getString(id)
+
+        } catch (e: IllegalAccessException) {
+            e.printStackTrace()
+        }
+
+        /*list.forEach { it ->
+            if (it.name.split("R\$string.".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[0] == idName) {
+                try {
+                    val id = it.getInt(R.string::class.java) //id of string
+
+                    return context.getString(id)
+
+                } catch (e: IllegalAccessException) {
+                    e.printStackTrace()
+                }
+            }
+        }*/
+
+        /*val fields = R.string::class.java.fields
         for (field in fields) {
 
             if (field.name.split("R\$string.".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[0] == idName) {
@@ -396,7 +421,7 @@ class Validator {
                 }
 
             }
-        }
+        }*/
         return ""
     }
 

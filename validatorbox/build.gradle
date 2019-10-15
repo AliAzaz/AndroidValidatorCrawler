@@ -9,7 +9,7 @@ android {
         minSdkVersion 15
         targetSdkVersion 29
         versionCode 1
-        versionName "1.0"
+        versionName "0.0.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
@@ -24,12 +24,24 @@ android {
 
 }
 
+ext {
+    edittextpicker = '1.0.4'
+    appcompat = '1.0.2'
+    cardview = '1.0.0'
+    espresso = '3.1.1'
+    test = '1.1.1'
+    coreKtx = '1.0.2'
+    junit = '4.12'
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.0.2'
-    implementation 'androidx.core:core-ktx:1.0.2'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+    implementation "androidx.appcompat:appcompat:$appcompat"
+    implementation "androidx.cardview:cardview:$cardview"
+    implementation "androidx.core:core-ktx:$coreKtx"
+    testImplementation "junit:junit:$junit"
+    androidTestImplementation "androidx.test:runner:$test"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso"
+    implementation "com.github.AliAzaz:Edittext-Library:$edittextpicker"
 }

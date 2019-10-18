@@ -12,17 +12,19 @@
         <item name="android:layout_margin">10dp</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">15sp</item>
         <item name="android:imeOptions">actionDone</item>
         <item name="android:singleLine">true</item>
         <item name="android:focusable">true</item>
         <item name="android:clickable">true</item>
         <item name="android:focusableInTouchMode">true</item>
-        <item name="android:padding">10dp</item>
+        <item name="android:padding">8dp</item>
     </style>
 
 
     <style name="cardView">
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_marginRight">10dp</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginTop">5dp</item>

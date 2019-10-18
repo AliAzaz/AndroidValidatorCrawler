@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".MainActivity">
 
@@ -33,10 +34,10 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="2dp"
-                    android:background="@color/colorPrimaryDark"
+                    android:layout_marginBottom="20dp"
                     android:gravity="center"
                     android:text="@string/info"
-                    android:textSize="40sp" />
+                    android:textSize="20sp" />
 
 
                 <androidx.cardview.widget.CardView style="@style/cardView">
@@ -45,11 +46,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/f101" />
 
                         <EditText
                             android:id="@+id/f101"
@@ -67,11 +63,6 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/f102" />
-
                         <EditText
                             android:id="@+id/f102"
                             style="@style/EditText"
@@ -88,17 +79,15 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/f103" />
-
-                        <EditText
+                        <com.edittextpicker.aliazaz.EditTextPicker
                             android:id="@+id/f103"
                             style="@style/EditText"
                             android:hint="@string/f103"
                             android:inputType="number"
-                            android:maxLength="11" />
+                            app:defaultValue=""
+                            app:mask="+92###-###-####"
+                            app:pattern="^(\\+92\\d{3,3}\\-\\d{3,3}\\-\\d{4,4})$"
+                            app:type="equal" />
 
                     </LinearLayout>
 
@@ -311,8 +300,9 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="4dp"
                     android:layout_weight="1"
-                    android:onClick="@{() -> callback.BtnSubmit()}"
+                    android:onClick="@{() -> callback.btnSubmit()}"
                     android:text="@string/submit"
+                    android:textColor="@android:color/white"
                     android:textSize="24sp"
                     android:textStyle="bold" />
 

@@ -18,6 +18,8 @@ class Validator {
         @JvmStatic
         fun emptyTextBox(context: Context, txt: EditText, msg: String): Boolean {
             return if (TextUtils.isEmpty(txt.text.toString())) {
+                txt.setBackgroundColor(Color.parseColor("#FFBABA"))
+                txt.setTextColor(Color.parseColor("#D8000C"))
                 Toast.makeText(context, "ERROR(Empty): $msg", Toast.LENGTH_SHORT).show()
                 txt.error = "Required"    // Set Error on last radio button
                 txt.requestFocus()
@@ -27,6 +29,7 @@ class Validator {
                 )
                 false
             } else {
+//                txt.setBackgroundResource()
                 txt.error = null
                 txt.clearFocus()
                 true
@@ -364,7 +367,6 @@ class Validator {
                         return false
                     }
                 } else if (view is LinearLayout) {
-
                     if (view.getTag() != null && view.getTag() == "0") {
                         if (!emptyCheckBox(
                                 context, view,
@@ -400,7 +402,8 @@ class Validator {
 
             val list: Array<out Field> = R.string::class.java.fields
             val field: Field =
-                list.single { it -> it.name.split("R\$string.".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[0] == idName }
+                list.singleOrNull { it -> it.name.split("R\$string.".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[0] == idName }
+                    ?: return ""
             try {
                 val id = field.getInt(R.string::class.java) //id of string
 

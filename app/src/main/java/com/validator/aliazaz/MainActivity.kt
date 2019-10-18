@@ -15,7 +15,7 @@ class MainActivity : AppCompatActivity() {
         bi.callback = this
     }
 
-    fun BtnSubmit() {
+    fun btnSubmit() {
         com.validatorbox.aliazaz.Validator.emptyCheckingContainer(this, bi.formValidateLayout)
     }
 }

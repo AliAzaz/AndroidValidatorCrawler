@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">ValidatorBox</string>
-    <string name="info">Personal Information</string>
+    <string name="info">PERSONAL INFORMATION</string>
     <string name="f101">Name</string>
     <string name="f102">Address</string>
-    <string name="f103">Contact No</string>
+    <string name="f103">Cell No</string>
     <string name="f104">City</string>
     <string name="f105">Are you Married</string>
     <string name="f106">Any Certification</string>

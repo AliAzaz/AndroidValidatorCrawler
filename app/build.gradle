@@ -8,7 +8,7 @@ android {
     compileSdkVersion 29
     defaultConfig {
         applicationId "com.validator.aliazaz"
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 29
         versionCode 1
         versionName "0.0.1"

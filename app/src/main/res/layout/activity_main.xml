@@ -36,6 +36,7 @@
                     android:layout_marginTop="2dp"
                     android:layout_marginBottom="20dp"
                     android:gravity="center"
+                    android:paddingTop="5dp"
                     android:text="@string/info"
                     android:textSize="20sp" />
 
@@ -300,6 +301,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="4dp"
                     android:layout_weight="1"
+                    android:background="@android:color/holo_green_dark"
                     android:onClick="@{() -> callback.btnSubmit()}"
                     android:text="@string/submit"
                     android:textColor="@android:color/white"

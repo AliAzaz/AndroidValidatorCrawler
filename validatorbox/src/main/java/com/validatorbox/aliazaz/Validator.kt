@@ -2,6 +2,7 @@ package com.validatorbox.aliazaz
 
 import android.content.Context
 import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.text.TextUtils
 import android.util.Log
 import android.view.View
@@ -10,15 +11,24 @@ import android.widget.*
 import androidx.cardview.widget.CardView
 import com.aliazaz.validatorbox.R
 import com.edittextpicker.aliazaz.EditTextPicker
-import java.lang.reflect.Field
+import kotlin.properties.Delegates
 
 class Validator {
 
     companion object {
+
+        lateinit var drawable: Drawable
+        var prvcolor by Delegates.notNull<Int>()
+
         @JvmStatic
         fun emptyTextBox(context: Context, txt: EditText, msg: String): Boolean {
             return if (TextUtils.isEmpty(txt.text.toString())) {
-                txt.setBackgroundColor(Color.parseColor("#FFBABA"))
+
+                drawable = txt.background
+                prvcolor = txt.currentTextColor
+
+
+                txt.setBackgroundResource(R.drawable.image_102)
                 txt.setTextColor(Color.parseColor("#D8000C"))
                 Toast.makeText(context, "ERROR(Empty): $msg", Toast.LENGTH_SHORT).show()
                 txt.error = "Required"    // Set Error on last radio button
@@ -30,6 +40,11 @@ class Validator {
                 false
             } else {
 //                txt.setBackgroundResource()
+
+                txt.setTextColor(prvcolor)
+                txt.background = drawable
+
+
                 txt.error = null
                 txt.clearFocus()
                 true
@@ -399,49 +414,8 @@ class Validator {
         }
 
         private fun getString(context: Context, idName: String): String {
-
-            val list: Array<out Field> = R.string::class.java.fields
-            val field: Field =
-                list.singleOrNull { it -> it.name.split("R\$string.".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[0] == idName }
-                    ?: return ""
-            try {
-                val id = field.getInt(R.string::class.java) //id of string
-
-                return context.getString(id)
-
-            } catch (e: IllegalAccessException) {
-                e.printStackTrace()
-            }
-
-            /*list.forEach { it ->
-            if (it.name.split("R\$string.".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[0] == idName) {
-                try {
-                    val id = it.getInt(R.string::class.java) //id of string
-
-                    return context.getString(id)
-
-                } catch (e: IllegalAccessException) {
-                    e.printStackTrace()
-                }
-            }
-        }*/
-
-            /*val fields = R.string::class.java.fields
-        for (field in fields) {
-
-            if (field.name.split("R\$string.".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[0] == idName) {
-                try {
-                    val id = field.getInt(R.string::class.java) //id of string
-
-                    return context.getString(id)
-
-                } catch (e: IllegalAccessException) {
-                    e.printStackTrace()
-                }
-
-            }
-        }*/
-            return ""
+            val res = context.resources.getIdentifier(idName, "string", context.packageName)
+            return if (res != 0) context.getString(res) else ""
         }
 
     }

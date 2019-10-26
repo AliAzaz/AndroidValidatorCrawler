@@ -2,34 +2,25 @@ package com.validatorbox.aliazaz
 
 import android.content.Context
 import android.graphics.Color
-import android.graphics.drawable.Drawable
 import android.text.TextUtils
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.cardview.widget.CardView
-import com.aliazaz.validatorbox.R
 import com.edittextpicker.aliazaz.EditTextPicker
-import kotlin.properties.Delegates
 
 class Validator {
 
     companion object {
 
-        lateinit var drawable: Drawable
-        var prvcolor by Delegates.notNull<Int>()
-
         @JvmStatic
         fun emptyTextBox(context: Context, txt: EditText, msg: String): Boolean {
             return if (TextUtils.isEmpty(txt.text.toString())) {
 
-                drawable = txt.background
-                prvcolor = txt.currentTextColor
+                ValidatorError.putError(context, txt)
 
 
-                txt.setBackgroundResource(R.drawable.image_102)
-                txt.setTextColor(Color.parseColor("#D8000C"))
                 Toast.makeText(context, "ERROR(Empty): $msg", Toast.LENGTH_SHORT).show()
                 txt.error = "Required"    // Set Error on last radio button
                 txt.requestFocus()
@@ -39,16 +30,14 @@ class Validator {
                 )
                 false
             } else {
-//                txt.setBackgroundResource()
 
-                txt.setTextColor(prvcolor)
-                txt.background = drawable
-
+                ValidatorError.clearError(txt)
 
                 txt.error = null
                 txt.clearFocus()
                 true
             }
+
 
         }
 
@@ -103,6 +92,9 @@ class Validator {
             }
 
             return if (!flag) {
+
+                ValidatorError.putError(context, txt)
+
                 Toast.makeText(context, "$messageConv: $msg", Toast.LENGTH_SHORT).show()
                 Log.i(
                     context.javaClass.name,
@@ -110,6 +102,10 @@ class Validator {
                 )
                 false
             } else {
+
+
+                ValidatorError.clearError(txt)
+
                 txt.setError(null)
                 txt.clearFocus()
                 true

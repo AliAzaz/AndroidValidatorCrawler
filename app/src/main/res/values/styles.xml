@@ -29,10 +29,22 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginTop">5dp</item>
         <item name="android:layout_marginBottom">5dp</item>
-        <!--<item name="android:layout_marginRight">10dp</item>-->
-        <!--<item name="android:layout_marginLeft">10dp</item>-->
         <item name="cardCornerRadius">10dp</item>
         <item name="cardElevation">4dp</item>
+    </style>
+
+    <style name="linearlayout_view">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="textview">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:typeface">serif</item>
+        <item name="android:padding">8dp</item>
     </style>
 
 </resources>

@@ -6,6 +6,8 @@
     <string name="f103">Cell No</string>
     <string name="f104">City</string>
     <string name="f105">Are you Married</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
     <string name="f106">Any Certification</string>
     <string name="f106a">Goggle Certification</string>
     <string name="f106b">Oracle Certification</string>

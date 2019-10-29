@@ -15,13 +15,16 @@ class Validator {
     companion object {
 
         @JvmStatic
-        fun emptyTextBox(context: Context, txt: EditText, msg: String): Boolean {
+        fun emptyTextBox(context: Context, txt: EditText, toggleFlag: Boolean = true): Boolean {
             return if (TextUtils.isEmpty(txt.text.toString())) {
-
                 ValidatorError.putError(context, txt)
-
-
-                Toast.makeText(context, "ERROR(Empty): $msg", Toast.LENGTH_SHORT).show()
+                if (toggleFlag) {
+                    Toast.makeText(
+                        context,
+                        "ERROR(Empty): ${getString(context, getIDComponent(txt))}",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
                 txt.error = "Required"    // Set Error on last radio button
                 txt.requestFocus()
                 Log.i(
@@ -30,21 +33,24 @@ class Validator {
                 )
                 false
             } else {
-
                 ValidatorError.clearError(txt)
-
                 txt.error = null
                 txt.clearFocus()
                 true
             }
-
-
         }
 
         @JvmStatic
-        fun emptyTextView(context: Context, txt: TextView, msg: String): Boolean {
+        fun emptyTextView(context: Context, txt: TextView, toggleFlag: Boolean = true): Boolean {
             return if (TextUtils.isEmpty(txt.text.toString())) {
-                Toast.makeText(context, "ERROR(Empty): $msg", Toast.LENGTH_SHORT).show()
+                ValidatorError.putError(context, txt)
+                if (toggleFlag) {
+                    Toast.makeText(
+                        context,
+                        "ERROR(Empty): ${getString(context, getIDComponent(txt))}",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
                 txt.error = "Required"    // Set Error on last radio button
                 txt.requestFocus()
                 Log.i(
@@ -53,31 +59,38 @@ class Validator {
                 )
                 false
             } else {
+                ValidatorError.clearError(txt)
                 txt.error = null
                 txt.clearFocus()
                 true
             }
-
         }
 
         @JvmStatic
-        fun emptyCustomTextBox(context: Context, txt: EditText, msg: String, flag: Boolean) {
-            if (flag) {
+        fun emptyCustomTextBox(
+            context: Context,
+            txt: TextView,
+            msg: String,
+            toggleFlag: Boolean = true
+        ): Boolean {
+            if (toggleFlag)
                 Toast.makeText(context, "ERROR: $msg", Toast.LENGTH_SHORT).show()
-                txt.error = msg
-                txt.requestFocus()
-                Log.i(
-                    context.javaClass.name,
-                    "${context.resources.getResourceEntryName(txt.id)} : $msg"
-                )
-            } else {
-                txt.error = null
-                txt.clearFocus()
-            }
+            txt.error = msg
+            txt.isFocusableInTouchMode = true
+            txt.requestFocus()
+            Log.i(
+                context.javaClass.name,
+                context.resources.getResourceEntryName(txt.id) + ": " + msg
+            )
+            return false
         }
 
         @JvmStatic
-        fun emptyEditTextPicker(context: Context, txt: EditText, msg: String): Boolean {
+        fun emptyEditTextPicker(
+            context: Context,
+            txt: EditText,
+            toggleFlag: Boolean = true
+        ): Boolean {
             var messageConv = ""
             var flag = true
             if (!(txt as EditTextPicker).isEmptyTextBox) {
@@ -85,32 +98,32 @@ class Validator {
                 messageConv = "ERROR(Empty)"
             } else if (!txt.isRangeTextValidate) {
                 flag = false
-                messageConv = "ERROR(range)"
+                messageConv = "ERROR(Range)"
             } else if (!txt.isTextEqualToPattern) {
                 flag = false
-                messageConv = "ERROR(pattern)"
+                messageConv = "ERROR(Pattern)"
             }
 
             return if (!flag) {
-
                 ValidatorError.putError(context, txt)
-
-                Toast.makeText(context, "$messageConv: $msg", Toast.LENGTH_SHORT).show()
+                if (toggleFlag) {
+                    Toast.makeText(
+                        context,
+                        "$messageConv: ${getString(context, getIDComponent(txt))}",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
                 Log.i(
                     context.javaClass.name,
                     "${context.resources.getResourceEntryName(txt.id)} : $messageConv"
                 )
                 false
             } else {
-
-
                 ValidatorError.clearError(txt)
-
                 txt.setError(null)
                 txt.clearFocus()
                 true
             }
-
         }
 
         @JvmStatic
@@ -119,12 +132,19 @@ class Validator {
             txt: EditText,
             min: Int,
             max: Int,
-            msg: String,
-            type: String
+            type: String,
+            toggleFlag: Boolean = true
         ): Boolean {
 
             return if (Integer.valueOf(txt.text.toString()) < min || Integer.valueOf(txt.text.toString()) > max) {
-                Toast.makeText(context, "ERROR(Invalid): $msg", Toast.LENGTH_SHORT).show()
+                ValidatorError.putError(context, txt)
+                if (toggleFlag) {
+                    Toast.makeText(
+                        context,
+                        "ERROR(Invalid): ${getString(context, getIDComponent(txt))}",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
                 txt.error = "Range is $min to $max ($type)"    // Set Error on last radio button
                 txt.requestFocus()
                 Log.i(
@@ -133,6 +153,7 @@ class Validator {
                 )
                 false
             } else {
+                ValidatorError.clearError(txt)
                 txt.error = null
                 txt.clearFocus()
                 true
@@ -145,16 +166,24 @@ class Validator {
             txt: EditText,
             min: Double,
             max: Double,
-            msg: String,
-            type: String
+            type: String,
+            toggleFlag: Boolean = true
         ): Boolean {
 
             return if (java.lang.Double.valueOf(txt.text.toString()) < min || java.lang.Double.valueOf(
                     txt.text.toString()
                 ) > max
             ) {
-                Toast.makeText(context, "ERROR(Invalid): $msg", Toast.LENGTH_SHORT).show()
-                txt.error = "Range is $min to $max ($type)"    // Set Error on last radio button
+                ValidatorError.putError(context, txt)
+                if (toggleFlag) {
+                    Toast.makeText(
+                        context,
+                        "ERROR(Invalid): ${getString(context, getIDComponent(txt))}",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+                txt.error =
+                    "Range is $min to $max (${type.let { "for $it" }})"    // Set Error on last radio button
                 txt.requestFocus()
                 Log.i(
                     context.javaClass.name,
@@ -162,6 +191,7 @@ class Validator {
                 )
                 false
             } else {
+                ValidatorError.clearError(txt)
                 txt.error = null
                 txt.clearFocus()
                 true
@@ -169,9 +199,16 @@ class Validator {
         }
 
         @JvmStatic
-        fun emptySpinner(context: Context, spin: Spinner, msg: String): Boolean {
+        fun emptySpinner(context: Context, spin: Spinner, toggleFlag: Boolean = true): Boolean {
             return if (spin.selectedItemPosition == 0) {
-                Toast.makeText(context, "ERROR(Empty): $msg", Toast.LENGTH_SHORT).show()
+                ValidatorError.putError(context, spin)
+                if (toggleFlag) {
+                    Toast.makeText(
+                        context,
+                        "ERROR(Empty): ${getString(context, getIDComponent(spin))}",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
                 (spin.selectedView as TextView).text = "Required"
                 (spin.selectedView as TextView).setTextColor(Color.RED)
                 spin.isFocusableInTouchMode = true
@@ -182,6 +219,7 @@ class Validator {
                 )
                 false
             } else {
+                ValidatorError.clearError(spin)
                 (spin.selectedView as TextView).error = null
                 true
             }
@@ -192,10 +230,16 @@ class Validator {
             context: Context,
             rdGrp: RadioGroup,
             rdBtn: RadioButton,
-            msg: String
+            toggleFlag: Boolean = true
         ): Boolean {
             if (rdGrp.checkedRadioButtonId == -1) {
-                Toast.makeText(context, "ERROR(Empty): $msg", Toast.LENGTH_SHORT).show()
+                if (toggleFlag) {
+                    Toast.makeText(
+                        context,
+                        "ERROR(Empty): ${getString(context, getIDComponent(rdGrp))}",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
                 rdBtn.error = "Required"    // Set Error on last radio button
                 rdBtn.isFocusable = true
                 rdBtn.isFocusableInTouchMode = true
@@ -220,13 +264,13 @@ class Validator {
                                 rdbFlag = emptyEditTextPicker(
                                     context,
                                     innerV as EditText,
-                                    getString(context, getIDComponent(innerV))
+                                    toggleFlag
                                 )
                             else
                                 rdbFlag = emptyTextBox(
                                     context,
                                     innerV,
-                                    getString(context, getIDComponent(innerV))
+                                    toggleFlag
                                 )
                     }
                     if (!rdbFlag) break
@@ -245,9 +289,31 @@ class Validator {
         @JvmStatic
         fun emptyCheckBox(
             context: Context,
+            cbx: CheckBox,
+            toggleFlag: Boolean = true
+        ): Boolean {
+            return if (!cbx.isChecked) {
+                cbx.error = getString(context, getIDComponent(cbx))
+                if (toggleFlag)
+                    Toast.makeText(
+                        context,
+                        "ERROR(Empty): ${getString(context, getIDComponent(cbx))}",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                return false
+            } else {
+                cbx.error = null
+                cbx.clearFocus()
+                true
+            }
+        }
+
+        @JvmStatic
+        fun emptyCheckBox(
+            context: Context,
             container: LinearLayout,
             cbx: CheckBox,
-            msg: String
+            toggleFlag: Boolean = true
         ): Boolean {
 
             var flag = false
@@ -275,13 +341,13 @@ class Validator {
                                         flag = emptyEditTextPicker(
                                             context,
                                             innerV as EditText,
-                                            getString(context, getIDComponent(innerV))
+                                            flag
                                         )
                                     else
                                         flag = emptyTextBox(
                                             context,
                                             innerV,
-                                            getString(context, getIDComponent(innerV))
+                                            flag
                                         )
                                 }
                             }
@@ -292,9 +358,13 @@ class Validator {
                 }
             }
             if (!flag) {
-                Toast.makeText(context, "ERROR(Empty): $msg", Toast.LENGTH_SHORT).show()
+                if (toggleFlag)
+                    Toast.makeText(
+                        context,
+                        "ERROR(Empty): ${getString(context, getIDComponent(cbx))}",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 cbx.error = "Required"    // Set Error on last radio button
-
                 Log.i(
                     context.javaClass.name,
                     "${context.resources.getResourceEntryName(cbx.id)} :  Required"
@@ -305,7 +375,11 @@ class Validator {
         }
 
         @JvmStatic
-        fun emptyCheckingContainer(context: Context, lv: ViewGroup): Boolean {
+        fun emptyCheckingContainer(
+            context: Context,
+            lv: ViewGroup,
+            toggleFlag: Boolean = true
+        ): Boolean {
 
             for (i in 0 until lv.childCount) {
                 val view = lv.getChildAt(i)
@@ -337,15 +411,13 @@ class Validator {
 
                     if (v != null) {
 
-                        val asNamed = getString(context, getIDComponent(view))
-
-                        if (!emptyRadioButton(context, view, v as RadioButton, asNamed)) {
+                        if (!emptyRadioButton(context, view, v as RadioButton, toggleFlag)) {
                             return false
                         }
                     }
 
                 } else if (view is Spinner) {
-                    if (!emptySpinner(context, view, getString(context, getIDComponent(view)))) {
+                    if (!emptySpinner(context, view, toggleFlag)) {
                         return false
                     }
                 } else if (view is EditText) {
@@ -353,7 +425,7 @@ class Validator {
                         if (!emptyEditTextPicker(
                                 context,
                                 view as EditText,
-                                getString(context, getIDComponent(view))
+                                toggleFlag
                             )
                         )
                             return false
@@ -361,28 +433,20 @@ class Validator {
                         if (!emptyTextBox(
                                 context,
                                 view,
-                                getString(context, getIDComponent(view))
+                                toggleFlag
                             )
                         ) {
                             return false
                         }
                     }
                 } else if (view is CheckBox) {
-                    if (!view.isChecked) {
-                        view.error = getString(context, getIDComponent(view))
-                        Toast.makeText(
-                            context,
-                            "ERROR(Empty): " + getString(context, getIDComponent(view)),
-                            Toast.LENGTH_SHORT
-                        ).show()
+                    if (!emptyCheckBox(context, view, toggleFlag))
                         return false
-                    }
                 } else if (view is LinearLayout) {
                     if (view.getTag() != null && view.getTag() == "0") {
                         if (!emptyCheckBox(
                                 context, view,
-                                view.getChildAt(0) as CheckBox,
-                                getString(context, getIDComponent(view.getChildAt(0)))
+                                view.getChildAt(0) as CheckBox, toggleFlag
                             )
                         ) {
                             return false

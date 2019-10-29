@@ -233,6 +233,7 @@ class Validator {
             toggleFlag: Boolean = true
         ): Boolean {
             if (rdGrp.checkedRadioButtonId == -1) {
+                ValidatorError.putError(context, rdBtn)
                 if (toggleFlag) {
                     Toast.makeText(
                         context,
@@ -260,14 +261,14 @@ class Validator {
 
                     if (innerV is EditText) {
                         if (getIDComponent(rdGrp.findViewById(rdGrp.checkedRadioButtonId)) == innerV.getTag())
-                            if (innerV is EditTextPicker)
-                                rdbFlag = emptyEditTextPicker(
+                            rdbFlag = if (innerV is EditTextPicker)
+                                emptyEditTextPicker(
                                     context,
                                     innerV as EditText,
                                     toggleFlag
                                 )
                             else
-                                rdbFlag = emptyTextBox(
+                                emptyTextBox(
                                     context,
                                     innerV,
                                     toggleFlag
@@ -277,6 +278,7 @@ class Validator {
                 }
 
                 return if (rdbFlag) {
+                    ValidatorError.clearError(rdBtn)
                     rdBtn.error = null
                     rdBtn.clearFocus()
                     rdbFlag
@@ -293,6 +295,7 @@ class Validator {
             toggleFlag: Boolean = true
         ): Boolean {
             return if (!cbx.isChecked) {
+                ValidatorError.putError(context, cbx)
                 cbx.error = getString(context, getIDComponent(cbx))
                 if (toggleFlag)
                     Toast.makeText(
@@ -302,6 +305,7 @@ class Validator {
                     ).show()
                 return false
             } else {
+                ValidatorError.clearError(cbx)
                 cbx.error = null
                 cbx.clearFocus()
                 true
@@ -315,12 +319,12 @@ class Validator {
             cbx: CheckBox,
             toggleFlag: Boolean = true
         ): Boolean {
-
             var flag = false
             for (i in 0 until container.childCount) {
                 val v = container.getChildAt(i)
                 if (v is CheckBox) {
                     v.error = null
+                    ValidatorError.clearError(cbx)
 
                     if (!v.isEnabled) {
                         flag = true
@@ -337,14 +341,14 @@ class Validator {
                             val innerV = container.getChildAt(j)
                             if (innerV is EditText) {
                                 if (getIDComponent(v) == innerV.getTag()) {
-                                    if (innerV is EditTextPicker)
-                                        flag = emptyEditTextPicker(
+                                    flag = if (innerV is EditTextPicker)
+                                        emptyEditTextPicker(
                                             context,
                                             innerV as EditText,
                                             flag
                                         )
                                     else
-                                        flag = emptyTextBox(
+                                        emptyTextBox(
                                             context,
                                             innerV,
                                             flag
@@ -358,6 +362,7 @@ class Validator {
                 }
             }
             if (!flag) {
+                ValidatorError.putError(context, cbx)
                 if (toggleFlag)
                     Toast.makeText(
                         context,

@@ -233,7 +233,7 @@ class Validator {
             toggleFlag: Boolean = true
         ): Boolean {
             if (rdGrp.checkedRadioButtonId == -1) {
-                ValidatorError.putError(context, rdBtn)
+                ValidatorError.putError(context, rdGrp)
                 if (toggleFlag) {
                     Toast.makeText(
                         context,
@@ -278,7 +278,7 @@ class Validator {
                 }
 
                 return if (rdbFlag) {
-                    ValidatorError.clearError(rdBtn)
+                    ValidatorError.clearError(rdGrp)
                     rdBtn.error = null
                     rdBtn.clearFocus()
                     rdbFlag
@@ -324,7 +324,7 @@ class Validator {
                 val v = container.getChildAt(i)
                 if (v is CheckBox) {
                     v.error = null
-                    ValidatorError.clearError(cbx)
+                    ValidatorError.clearError(container)
 
                     if (!v.isEnabled) {
                         flag = true
@@ -362,7 +362,7 @@ class Validator {
                 }
             }
             if (!flag) {
-                ValidatorError.putError(context, cbx)
+                ValidatorError.putError(context, container)
                 if (toggleFlag)
                     Toast.makeText(
                         context,

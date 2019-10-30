@@ -165,7 +165,7 @@
                                 style="@style/EditText"
                                 android:hint="@string/f106d"
                                 android:tag="f106d"
-                                android:text='@{f106d.checked ? f106dx.getText.toString : "" }'
+                                android:text='@{f106d.checked ? f106dx.getText().toString() : "" }'
                                 android:visibility='@{f106d.checked ? View.VISIBLE : View.GONE}' />
 
                         </LinearLayout>
@@ -197,7 +197,7 @@
                     android:layout_margin="4dp"
                     android:layout_weight="1"
                     android:background="@android:color/holo_green_dark"
-                    android:onClick="@{() -> callback.btnSubmit()}"
+                    android:onClick="@{callback::btnSubmit}"
                     android:text="@string/submit"
                     android:textColor="@android:color/white"
                     android:textSize="24sp"

@@ -1,6 +1,7 @@
 package com.validator.aliazaz
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.validator.aliazaz.databinding.ActivityMainBinding
@@ -15,7 +16,7 @@ class MainActivity : AppCompatActivity() {
         bi.callback = this
     }
 
-    fun btnSubmit() {
+    fun btnSubmit(view: View) {
         com.validatorbox.aliazaz.Validator.emptyCheckingContainer(this, bi.formValidateLayout)
     }
 }

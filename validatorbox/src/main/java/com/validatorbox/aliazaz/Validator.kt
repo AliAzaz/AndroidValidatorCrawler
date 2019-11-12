@@ -315,7 +315,7 @@ class Validator {
         @JvmStatic
         fun emptyCheckBox(
             context: Context,
-            container: LinearLayout,
+            container: ViewGroup,
             cbx: CheckBox,
             toggleFlag: Boolean = true
         ): Boolean {
@@ -447,7 +447,8 @@ class Validator {
                 } else if (view is CheckBox) {
                     if (!emptyCheckBox(context, view, toggleFlag))
                         return false
-                } else if (view is LinearLayout) {
+                }
+                /*else if (view is LinearLayout) {
                     if (view.getTag() != null && view.getTag() == "0") {
                         if (!emptyCheckBox(
                                 context, view,
@@ -461,10 +462,27 @@ class Validator {
                             return false
                         }
                     }
-                } else if (view is ViewGroup) {
+                }*/
+                else if (view is ViewGroup) {
                     if (!emptyCheckingContainer(context, view)) {
                         return false
                     }
+
+                    if (view.getTag() != null && view.getTag() == "0") {
+                        if (!emptyCheckBox(
+                                context, view,
+                                view.getChildAt(0) as CheckBox, toggleFlag
+                            )
+                        ) {
+                            return false
+                        }
+                    } else {
+                        if (!emptyCheckingContainer(context, view)) {
+                            return false
+                        }
+                    }
+
+
                 }
 
             }

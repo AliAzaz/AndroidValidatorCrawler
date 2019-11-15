@@ -7,7 +7,6 @@ import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.cardview.widget.CardView
 import com.edittextpicker.aliazaz.EditTextPicker
 
 class Validator {
@@ -316,13 +315,15 @@ class Validator {
         fun emptyCheckBox(
             context: Context,
             container: ViewGroup,
-            cbx: CheckBox,
             toggleFlag: Boolean = true
         ): Boolean {
             var flag = false
+            var subflag = false
+            lateinit var firstCheckBox: CheckBox
             for (i in 0 until container.childCount) {
                 val v = container.getChildAt(i)
                 if (v is CheckBox) {
+                    firstCheckBox = v
                     v.error = null
                     ValidatorError.clearError(container)
 
@@ -337,14 +338,88 @@ class Validator {
                     if (v.isChecked) {
                         flag = true
 
-                        for (j in 1 until container.childCount) {
+                        for (j in 0 until container.childCount) {
+                            val innerV = container.getChildAt(j)
+                            /*if (innerV is EditText) {
+                                if (getIDComponent(v) == innerV.getTag()) {
+                                    subflag = if (innerV is EditTextPicker)
+                                        emptyEditTextPicker(
+                                            context,
+                                            innerV,
+                                            toggleFlag
+                                        )
+                                    else
+                                        emptyTextBox(
+                                            context,
+                                            innerV,
+                                            toggleFlag
+                                        )
+                                }
+                            }*/
+
+
+
+
+                            if (!subflag) break
+                        }
+                        if (!subflag) break
+                    }
+                }
+            }
+            if (!flag) {
+                ValidatorError.putError(context, container)
+                if (toggleFlag)
+                    Toast.makeText(
+                        context,
+                        "ERROR(Empty): ${getString(context, getIDComponent(firstCheckBox))}",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                firstCheckBox.error = "Required"    // Set Error
+                Log.i(
+                    context.javaClass.name,
+                    "${context.resources.getResourceEntryName(firstCheckBox.id)} :  Required"
+                )
+                return false
+            } else if (!subflag) return false
+            return true
+        }
+
+        @JvmStatic
+        fun emptyCheckBox2(
+            context: Context,
+            container: ViewGroup,
+            toggleFlag: Boolean = true
+        ): Boolean {
+            var flag = false
+            var subflag = false
+            lateinit var firstCheckBox: CheckBox
+
+            for (i in 0 until container.childCount) {
+                val v = container.getChildAt(i)
+                if (v is CheckBox) {
+                    firstCheckBox = v
+                    v.error = null
+                    ValidatorError.clearError(container)
+
+                    if (!v.isEnabled) {
+                        flag = true
+                        continue
+                    } else {
+                        if (!flag)
+                            flag = false
+                    }
+
+                    if (v.isChecked) {
+                        flag = true
+
+                        for (j in 0 until container.childCount) {
                             val innerV = container.getChildAt(j)
                             if (innerV is EditText) {
                                 if (getIDComponent(v) == innerV.getTag()) {
                                     flag = if (innerV is EditTextPicker)
                                         emptyEditTextPicker(
                                             context,
-                                            innerV as EditText,
+                                            innerV,
                                             flag
                                         )
                                     else
@@ -366,13 +441,13 @@ class Validator {
                 if (toggleFlag)
                     Toast.makeText(
                         context,
-                        "ERROR(Empty): ${getString(context, getIDComponent(cbx))}",
+                        "ERROR(Empty): ${getString(context, getIDComponent(firstCheckBox))}",
                         Toast.LENGTH_SHORT
                     ).show()
-                cbx.error = "Required"    // Set Error on last radio button
+                firstCheckBox.error = "Required"    // Set Error
                 Log.i(
                     context.javaClass.name,
-                    "${context.resources.getResourceEntryName(cbx.id)} :  Required"
+                    "${context.resources.getResourceEntryName(firstCheckBox.id)} :  Required"
                 )
                 return false
             }
@@ -396,11 +471,7 @@ class Validator {
                 if (view.tag != null && view.tag == "-1")
                     continue
 
-                if (view is CardView) {
-                    if (!emptyCheckingContainer(context, view)) {
-                        return false
-                    }
-                } else if (view is RadioGroup) {
+                if (view is RadioGroup) {
 
                     var radioFlag = false
                     var v: View? = null
@@ -429,26 +500,25 @@ class Validator {
                     if (view is EditTextPicker) {
                         if (!emptyEditTextPicker(
                                 context,
-                                view as EditText,
+                                view,
                                 toggleFlag
                             )
-                        )
-                            return false
+                        ) return false
                     } else {
                         if (!emptyTextBox(
                                 context,
                                 view,
                                 toggleFlag
                             )
-                        ) {
-                            return false
-                        }
+                        ) return false
+
                     }
-                } else if (view is CheckBox) {
+                }
+                /*else if (view is CheckBox) {
                     if (!emptyCheckBox(context, view, toggleFlag))
                         return false
                 }
-                /*else if (view is LinearLayout) {
+                else if (view is LinearLayout) {
                     if (view.getTag() != null && view.getTag() == "0") {
                         if (!emptyCheckBox(
                                 context, view,
@@ -464,14 +534,10 @@ class Validator {
                     }
                 }*/
                 else if (view is ViewGroup) {
-                    if (!emptyCheckingContainer(context, view)) {
-                        return false
-                    }
 
                     if (view.getTag() != null && view.getTag() == "0") {
                         if (!emptyCheckBox(
-                                context, view,
-                                view.getChildAt(0) as CheckBox, toggleFlag
+                                context, view, toggleFlag
                             )
                         ) {
                             return false
@@ -481,7 +547,6 @@ class Validator {
                             return false
                         }
                     }
-
 
                 }
 

@@ -15,27 +15,31 @@ class Validator {
 
         @JvmStatic
         fun emptyTextBox(context: Context, txt: EditText, toggleFlag: Boolean = true): Boolean {
-            return if (TextUtils.isEmpty(txt.text.toString())) {
-                ValidatorError.putError(context, txt)
-                if (toggleFlag) {
-                    Toast.makeText(
-                        context,
-                        "ERROR(Empty): ${getString(context, getIDComponent(txt))}",
-                        Toast.LENGTH_SHORT
-                    ).show()
+            return when {
+                txt is EditTextPicker -> return emptyEditTextPicker(context, txt, toggleFlag)
+                TextUtils.isEmpty(txt.text.toString()) -> {
+                    ValidatorError.putError(context, txt)
+                    if (toggleFlag) {
+                        Toast.makeText(
+                            context,
+                            "ERROR(Empty): ${getString(context, getIDComponent(txt))}",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                    txt.error = "Required"    // Set Error on last radio button
+                    txt.requestFocus()
+                    Log.i(
+                        context.javaClass.name,
+                        "${context.resources.getResourceEntryName(txt.id)} : Required"
+                    )
+                    false
                 }
-                txt.error = "Required"    // Set Error on last radio button
-                txt.requestFocus()
-                Log.i(
-                    context.javaClass.name,
-                    "${context.resources.getResourceEntryName(txt.id)} : Required"
-                )
-                false
-            } else {
-                ValidatorError.clearError(txt)
-                txt.error = null
-                txt.clearFocus()
-                true
+                else -> {
+                    ValidatorError.clearError(txt)
+                    txt.error = null
+                    txt.clearFocus()
+                    true
+                }
             }
         }
 
@@ -461,23 +465,60 @@ class Validator {
             toggleFlag: Boolean = true
         ): Boolean {
 
-            for (i in 0 until lv.childCount) {
+            loop@ for (i in 0 until lv.childCount) {
                 val view = lv.getChildAt(i)
 
-                if (view.visibility == View.GONE || !view.isEnabled)
+                if (view.visibility == View.GONE || !view.isEnabled || (view.tag != null && view.tag == "-1"))
                     continue
 
                 // use tag for situation when you don't want to read the component
-                if (view.tag != null && view.tag == "-1")
-                    continue
+                /*if (view.tag != null && view.tag == "-1")
+                    continue*/
 
-                if (view is RadioGroup) {
+                when (view) {
+                    is RadioGroup -> {
+                        var radioFlag = false
+                        lateinit var v: RadioButton
+                        for (j in 0 until view.childCount) {
+                            if (view.getChildAt(j) is RadioButton) {
+                                v = view.getChildAt(j) as RadioButton
+                                radioFlag = true
+                                break
+                            }
+                        }
+
+                        if (!radioFlag) continue@loop
+
+                        if (!emptyRadioButton(context, view, v, toggleFlag)) return false
+
+                    }
+                    is Spinner -> if (!emptySpinner(context, view, toggleFlag)) return false
+
+                    is EditText -> if (!emptyTextBox(context, view, toggleFlag)) return false
+
+                    is ViewGroup -> when {
+                        view.tag == "0" -> {
+                            if (!emptyCheckBox(context, view, toggleFlag)) {
+                                return false
+                            }
+                        }
+                        else -> {
+                            if (!emptyCheckingContainer(context, view, toggleFlag)) {
+                                return false
+                            }
+                        }
+                    }
+
+                }
+
+
+                /*if (view is RadioGroup) {
 
                     var radioFlag = false
-                    var v: View? = null
+                    lateinit var v: RadioButton
                     for (j in 0 until view.childCount) {
                         if (view.getChildAt(j) is RadioButton) {
-                            v = view.getChildAt(j)
+                            v = view.getChildAt(j) as RadioButton
                             radioFlag = true
                             break
                         }
@@ -485,11 +526,8 @@ class Validator {
 
                     if (!radioFlag) continue
 
-                    if (v != null) {
-
-                        if (!emptyRadioButton(context, view, v as RadioButton, toggleFlag)) {
-                            return false
-                        }
+                    if (!emptyRadioButton(context, view, v, toggleFlag)) {
+                        return false
                     }
 
                 } else if (view is Spinner) {
@@ -514,7 +552,7 @@ class Validator {
 
                     }
                 }
-                /*else if (view is CheckBox) {
+                *//*else if (view is CheckBox) {
                     if (!emptyCheckBox(context, view, toggleFlag))
                         return false
                 }
@@ -532,7 +570,7 @@ class Validator {
                             return false
                         }
                     }
-                }*/
+                }*//*
                 else if (view is ViewGroup) {
 
                     if (view.getTag() != null && view.getTag() == "0") {
@@ -548,7 +586,7 @@ class Validator {
                         }
                     }
 
-                }
+                }*/
 
             }
             return true

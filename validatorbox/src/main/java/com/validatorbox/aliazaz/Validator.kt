@@ -316,7 +316,7 @@ class Validator {
         }
 
         @JvmStatic
-        fun emptyCheckBox(
+        fun emptyMultiCheckBox(
             context: Context,
             container: ViewGroup,
             toggleFlag: Boolean = true
@@ -342,9 +342,10 @@ class Validator {
                     if (v.isChecked) {
                         flag = true
 
-                        for (j in 0 until container.childCount) {
+
+                        /*for (j in 0 until container.childCount) {
                             val innerV = container.getChildAt(j)
-                            /*if (innerV is EditText) {
+                            *//*if (innerV is EditText) {
                                 if (getIDComponent(v) == innerV.getTag()) {
                                     subflag = if (innerV is EditTextPicker)
                                         emptyEditTextPicker(
@@ -359,13 +360,16 @@ class Validator {
                                             toggleFlag
                                         )
                                 }
-                            }*/
+                            }*//*
 
 
 
 
                             if (!subflag) break
-                        }
+                        }*/
+
+                        subflag = emptyCheckingContainer(context, v, toggleFlag)
+
                         if (!subflag) break
                     }
                 }
@@ -389,7 +393,7 @@ class Validator {
         }
 
         @JvmStatic
-        fun emptyCheckBox2(
+        fun emptyMultiCheckBox2(
             context: Context,
             container: ViewGroup,
             toggleFlag: Boolean = true
@@ -458,22 +462,18 @@ class Validator {
             return true
         }
 
-        @JvmStatic
-        fun emptyCheckingContainer(
-            context: Context,
-            lv: ViewGroup,
-            toggleFlag: Boolean = true
-        ): Boolean {
+        /*      @JvmStatic
+              fun emptyCheckingContainer(
+                  context: Context,
+                  lv: ViewGroup,
+                  toggleFlag: Boolean = true
+              ): Boolean {
 
-            loop@ for (i in 0 until lv.childCount) {
-                val view = lv.getChildAt(i)
+                  loop@ for (i in 0 until lv.childCount) {
+                      val view = lv.getChildAt(i)
 
-                if (view.visibility == View.GONE || !view.isEnabled || (view.tag != null && view.tag == "-1"))
+                      *//*if (view.visibility == View.GONE || !view.isEnabled || (view.tag != null && view.tag == "-1"))
                     continue
-
-                // use tag for situation when you don't want to read the component
-                /*if (view.tag != null && view.tag == "-1")
-                    continue*/
 
                 when (view) {
                     is RadioGroup -> {
@@ -498,7 +498,7 @@ class Validator {
 
                     is ViewGroup -> when {
                         view.tag == "0" -> {
-                            if (!emptyCheckBox(context, view, toggleFlag)) {
+                            if (!emptyMultiCheckBox(context, view, toggleFlag)) {
                                 return false
                             }
                         }
@@ -509,11 +509,29 @@ class Validator {
                         }
                     }
 
+                }*//*
+
+                when {
+                    emptyCheckingContainer(context, view, toggleFlag) -> continue@loop
+                    else -> return false
                 }
 
+            }
+            return true
+        }*/
 
-                /*if (view is RadioGroup) {
+        @JvmStatic
+        fun emptyCheckingContainer(
+            context: Context,
+            view: View,
+            toggleFlag: Boolean = true
+        ): Boolean {
 
+            if (view.visibility == View.GONE || !view.isEnabled || (view.tag != null && view.tag == "-1"))
+                return true
+
+            when (view) {
+                is RadioGroup -> {
                     var radioFlag = false
                     lateinit var v: RadioButton
                     for (j in 0 until view.childCount) {
@@ -524,71 +542,39 @@ class Validator {
                         }
                     }
 
-                    if (!radioFlag) continue
+                    if (!radioFlag) return true
 
-                    if (!emptyRadioButton(context, view, v, toggleFlag)) {
-                        return false
-                    }
+                    if (!emptyRadioButton(context, view, v, toggleFlag)) return false
 
-                } else if (view is Spinner) {
-                    if (!emptySpinner(context, view, toggleFlag)) {
-                        return false
+                }
+                is Spinner -> if (!emptySpinner(context, view, toggleFlag)) return false
+
+                is EditText -> if (!emptyTextBox(context, view, toggleFlag)) return false
+
+                is CheckBox -> if (!emptyCheckBox(context, view, toggleFlag)) return false
+
+                is ViewGroup -> when {
+                    view.tag == "0" -> {
+                        if (!emptyMultiCheckBox(context, view, toggleFlag)) {
+                            return false
+                        }
                     }
-                } else if (view is EditText) {
-                    if (view is EditTextPicker) {
-                        if (!emptyEditTextPicker(
-                                context,
-                                view,
-                                toggleFlag
-                            )
-                        ) return false
-                    } else {
-                        if (!emptyTextBox(
-                                context,
-                                view,
-                                toggleFlag
-                            )
-                        ) return false
+                    else -> {
+
+                        loop@ for (i in 0 until view.childCount) {
+                            val view = view.getChildAt(i)
+
+                            when {
+                                emptyCheckingContainer(context, view, toggleFlag) -> continue@loop
+                                else -> return false
+                            }
+                        }
 
                     }
                 }
-                *//*else if (view is CheckBox) {
-                    if (!emptyCheckBox(context, view, toggleFlag))
-                        return false
-                }
-                else if (view is LinearLayout) {
-                    if (view.getTag() != null && view.getTag() == "0") {
-                        if (!emptyCheckBox(
-                                context, view,
-                                view.getChildAt(0) as CheckBox, toggleFlag
-                            )
-                        ) {
-                            return false
-                        }
-                    } else {
-                        if (!emptyCheckingContainer(context, view)) {
-                            return false
-                        }
-                    }
-                }*//*
-                else if (view is ViewGroup) {
-
-                    if (view.getTag() != null && view.getTag() == "0") {
-                        if (!emptyCheckBox(
-                                context, view, toggleFlag
-                            )
-                        ) {
-                            return false
-                        }
-                    } else {
-                        if (!emptyCheckingContainer(context, view)) {
-                            return false
-                        }
-                    }
-
-                }*/
 
             }
+
             return true
         }
 

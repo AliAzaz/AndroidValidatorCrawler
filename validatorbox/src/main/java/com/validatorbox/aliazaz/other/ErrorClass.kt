@@ -4,14 +4,7 @@ import android.graphics.drawable.Drawable
 
 internal data class ErrorClass(
     var drawable: Drawable? = null,
-    var padding: PaddingClass = PaddingClass(
-        0,
-        0,
-        0,
-        0,
-        0,
-        0
-    ),
+    var padding: PaddingClass = PaddingClass(),
     var prvcolor: Int = 0,
     var id: Int = 0
 )

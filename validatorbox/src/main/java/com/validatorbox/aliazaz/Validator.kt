@@ -341,35 +341,10 @@ class Validator {
 
                     if (v.isChecked) {
                         flag = true
-
-
-                        /*for (j in 0 until container.childCount) {
-                            val innerV = container.getChildAt(j)
-                            *//*if (innerV is EditText) {
-                                if (getIDComponent(v) == innerV.getTag()) {
-                                    subflag = if (innerV is EditTextPicker)
-                                        emptyEditTextPicker(
-                                            context,
-                                            innerV,
-                                            toggleFlag
-                                        )
-                                    else
-                                        emptyTextBox(
-                                            context,
-                                            innerV,
-                                            toggleFlag
-                                        )
-                                }
-                            }*//*
-
-
-
-
-                            if (!subflag) break
-                        }*/
-
+                        if (i + 1 == container.childCount || container.getChildAt(i + 1) is CheckBox)
+                            continue
+                        val v = container.getChildAt(i + 1)
                         subflag = emptyCheckingContainer(context, v, toggleFlag)
-
                         if (!subflag) break
                     }
                 }
@@ -392,8 +367,7 @@ class Validator {
             return true
         }
 
-        @JvmStatic
-        fun emptyMultiCheckBox2(
+        private fun emptyMultiCheckBox2(
             context: Context,
             container: ViewGroup,
             toggleFlag: Boolean = true
@@ -547,6 +521,7 @@ class Validator {
                     if (!emptyRadioButton(context, view, v, toggleFlag)) return false
 
                 }
+
                 is Spinner -> if (!emptySpinner(context, view, toggleFlag)) return false
 
                 is EditText -> if (!emptyTextBox(context, view, toggleFlag)) return false

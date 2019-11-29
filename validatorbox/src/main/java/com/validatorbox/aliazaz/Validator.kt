@@ -501,8 +501,10 @@ class Validator {
             toggleFlag: Boolean = true
         ): Boolean {
 
-            if (view.visibility == View.GONE || !view.isEnabled || (view.tag != null && view.tag == "-1"))
+            if (view.visibility == View.GONE || !view.isEnabled || (view.tag != null && view.tag == "-1")) {
+                ValidatorError.clearError(view)
                 return true
+            }
 
             when (view) {
                 is RadioGroup -> {

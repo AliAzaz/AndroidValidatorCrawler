@@ -1,5 +1,6 @@
 package com.validatorbox.aliazaz
 
+import android.app.Activity
 import android.content.Context
 import android.graphics.Color
 import android.text.TextUtils
@@ -501,8 +502,9 @@ class Validator {
             toggleFlag: Boolean = true
         ): Boolean {
 
+            ValidatorError.clearError(view, (context as Activity))
+
             if (view.visibility == View.GONE || !view.isEnabled || (view.tag != null && view.tag == "-1")) {
-                ValidatorError.clearError(view)
                 return true
             }
 

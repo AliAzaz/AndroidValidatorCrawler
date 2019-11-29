@@ -1,6 +1,7 @@
 package com.validatorbox.aliazaz
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
 import android.graphics.Color
 import android.view.View
@@ -44,10 +45,10 @@ internal object ValidatorError {
 
     }
 
-    fun clearError(viewCom: View) {
+    fun clearError(viewCom: View, activity: Activity = Activity()) {
 
         when {
-            error != null && error!!.id == viewCom.id -> {
+            /*error != null && error!!.id == viewCom.id -> {
                 ViewCompat.setBackground(viewCom, error!!.drawable)
                 viewCom.setPadding(
                     error!!.padding.paddingLeft,
@@ -57,6 +58,22 @@ internal object ValidatorError {
                 )
                 if (viewCom is EditText) {
                     error!!.prvcolor.let { viewCom.setTextColor(it) }
+                }
+                error = null
+            }*/
+            error != null -> {
+
+                val v = activity.findViewById<View>(error!!.id)
+
+                ViewCompat.setBackground(v, error!!.drawable)
+                v.setPadding(
+                    error!!.padding.paddingLeft,
+                    error!!.padding.paddingTop,
+                    error!!.padding.paddingRight,
+                    error!!.padding.paddingBottom
+                )
+                if (v is EditText) {
+                    error!!.prvcolor.let { v.setTextColor(it) }
                 }
                 error = null
             }

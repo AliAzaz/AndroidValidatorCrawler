@@ -35,38 +35,31 @@ class Validator {
                     )
                     false
                 }
-                else -> {
-                    ValidatorError.clearError(txt)
-                    txt.error = null
-                    txt.clearFocus()
-                    true
-                }
+                else -> true
             }
         }
 
         @JvmStatic
         fun emptyTextView(context: Context, txt: TextView, toggleFlag: Boolean = true): Boolean {
-            return if (TextUtils.isEmpty(txt.text.toString())) {
-                ValidatorError.putError(context, txt)
-                if (toggleFlag) {
-                    Toast.makeText(
-                        context,
-                        "ERROR(Empty): ${getString(context, getIDComponent(txt))}",
-                        Toast.LENGTH_SHORT
-                    ).show()
+            return when {
+                TextUtils.isEmpty(txt.text.toString()) -> {
+                    ValidatorError.putError(context, txt)
+                    if (toggleFlag) {
+                        Toast.makeText(
+                            context,
+                            "ERROR(Empty): ${getString(context, getIDComponent(txt))}",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                    txt.error = "Required"    // Set Error on last radio button
+                    txt.requestFocus()
+                    Log.i(
+                        context.javaClass.name,
+                        "${context.resources.getResourceEntryName(txt.id)} : Required"
+                    )
+                    false
                 }
-                txt.error = "Required"    // Set Error on last radio button
-                txt.requestFocus()
-                Log.i(
-                    context.javaClass.name,
-                    "${context.resources.getResourceEntryName(txt.id)} : Required"
-                )
-                false
-            } else {
-                ValidatorError.clearError(txt)
-                txt.error = null
-                txt.clearFocus()
-                true
+                else -> true
             }
         }
 
@@ -77,6 +70,7 @@ class Validator {
             msg: String,
             toggleFlag: Boolean = true
         ): Boolean {
+            ValidatorError.putError(context, txt)
             if (toggleFlag)
                 Toast.makeText(context, "ERROR: $msg", Toast.LENGTH_SHORT).show()
             txt.error = msg
@@ -122,12 +116,7 @@ class Validator {
                     "${context.resources.getResourceEntryName(txt.id)} : $messageConv"
                 )
                 false
-            } else {
-                ValidatorError.clearError(txt)
-                txt.setError(null)
-                txt.clearFocus()
-                true
-            }
+            } else true
         }
 
         @JvmStatic
@@ -156,12 +145,8 @@ class Validator {
                     "${context.resources.getResourceEntryName(txt.id)} : Range is $min to $max times"
                 )
                 false
-            } else {
-                ValidatorError.clearError(txt)
-                txt.error = null
-                txt.clearFocus()
-                true
-            }
+            } else true
+
         }
 
         @JvmStatic
@@ -194,38 +179,33 @@ class Validator {
                     "${context.resources.getResourceEntryName(txt.id)} : Range is $min to $max times"
                 )
                 false
-            } else {
-                ValidatorError.clearError(txt)
-                txt.error = null
-                txt.clearFocus()
-                true
-            }
+            } else true
+
         }
 
         @JvmStatic
         fun emptySpinner(context: Context, spin: Spinner, toggleFlag: Boolean = true): Boolean {
-            return if (spin.selectedItemPosition == 0) {
-                ValidatorError.putError(context, spin)
-                if (toggleFlag) {
-                    Toast.makeText(
-                        context,
-                        "ERROR(Empty): ${getString(context, getIDComponent(spin))}",
-                        Toast.LENGTH_SHORT
-                    ).show()
+            return when {
+                (spin.selectedItemPosition == 0) -> {
+                    ValidatorError.putError(context, spin)
+                    if (toggleFlag) {
+                        Toast.makeText(
+                            context,
+                            "ERROR(Empty): ${getString(context, getIDComponent(spin))}",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                    (spin.selectedView as TextView).text = "Required"
+                    (spin.selectedView as TextView).setTextColor(Color.RED)
+                    spin.isFocusableInTouchMode = true
+                    spin.requestFocus()
+                    Log.i(
+                        context.javaClass.name,
+                        "${context.resources.getResourceEntryName(spin.id)} : Required"
+                    )
+                    false
                 }
-                (spin.selectedView as TextView).text = "Required"
-                (spin.selectedView as TextView).setTextColor(Color.RED)
-                spin.isFocusableInTouchMode = true
-                spin.requestFocus()
-                Log.i(
-                    context.javaClass.name,
-                    "${context.resources.getResourceEntryName(spin.id)} : Required"
-                )
-                false
-            } else {
-                ValidatorError.clearError(spin)
-                (spin.selectedView as TextView).error = null
-                true
+                else -> true
             }
         }
 
@@ -298,22 +278,21 @@ class Validator {
             cbx: CheckBox,
             toggleFlag: Boolean = true
         ): Boolean {
-            return if (!cbx.isChecked) {
-                ValidatorError.putError(context, cbx)
-                cbx.error = getString(context, getIDComponent(cbx))
-                if (toggleFlag)
-                    Toast.makeText(
-                        context,
-                        "ERROR(Empty): ${getString(context, getIDComponent(cbx))}",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                return false
-            } else {
-                ValidatorError.clearError(cbx)
-                cbx.error = null
-                cbx.clearFocus()
-                true
+            return when {
+                !cbx.isChecked -> {
+                    ValidatorError.putError(context, cbx)
+                    cbx.error = getString(context, getIDComponent(cbx))
+                    if (toggleFlag)
+                        Toast.makeText(
+                            context,
+                            "ERROR(Empty): ${getString(context, getIDComponent(cbx))}",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    return false
+                }
+                else -> true
             }
+
         }
 
         @JvmStatic
@@ -330,7 +309,6 @@ class Validator {
                 if (v is CheckBox) {
                     firstCheckBox = v
                     v.error = null
-                    ValidatorError.clearError(container)
 
                     if (!v.isEnabled) {
                         flag = true

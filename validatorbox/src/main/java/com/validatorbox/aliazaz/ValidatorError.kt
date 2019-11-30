@@ -5,7 +5,10 @@ import android.app.Activity
 import android.content.Context
 import android.graphics.Color
 import android.view.View
+import android.widget.CheckBox
 import android.widget.EditText
+import android.widget.Spinner
+import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import com.aliazaz.validatorbox.R
@@ -62,19 +65,33 @@ internal object ValidatorError {
                 error = null
             }*/
             error != null -> {
-
-                val v = activity.findViewById<View>(error!!.id)
-
-                ViewCompat.setBackground(v, error!!.drawable)
-                v.setPadding(
+                val view = activity.findViewById<View>(error!!.id)
+                ViewCompat.setBackground(view, error!!.drawable)
+                view.setPadding(
                     error!!.padding.paddingLeft,
                     error!!.padding.paddingTop,
                     error!!.padding.paddingRight,
                     error!!.padding.paddingBottom
                 )
-                if (v is EditText) {
-                    error!!.prvcolor.let { v.setTextColor(it) }
+
+                when (view) {
+                    is EditText -> {
+                        error!!.prvcolor.let { view.setTextColor(it) }
+                        view.error = null
+                        view.clearFocus()
+                    }
+
+                    is CheckBox -> {
+                        view.error = null
+                        view.clearFocus()
+                    }
+
+                    is Spinner -> {
+                        (view.selectedView as TextView).error = null
+                    }
                 }
+
+
                 error = null
             }
         }

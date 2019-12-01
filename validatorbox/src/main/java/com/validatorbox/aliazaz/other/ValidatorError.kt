@@ -46,7 +46,7 @@ internal object ValidatorError {
 
     }
 
-    fun clearError(viewCom: View, activity: Activity = Activity()) {
+    fun clearError(activity: Activity = Activity()) {
 
         when {
             error != null -> {

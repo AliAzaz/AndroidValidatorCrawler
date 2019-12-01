@@ -254,9 +254,9 @@ class Validator {
                 return if (rdbFlag) {
                     rdBtn.error = null
                     rdBtn.clearFocus()
-                    rdbFlag
+                    true
                 } else
-                    rdbFlag
+                    false
 
             }
         }
@@ -329,12 +329,18 @@ class Validator {
                         Toast.LENGTH_SHORT
                     ).show()
                 firstCheckBox.error = "Required"    // Set Error
+                firstCheckBox.isFocusable = true
+                firstCheckBox.isFocusableInTouchMode = true
+                firstCheckBox.requestFocus()
                 Log.i(
                     context.javaClass.name,
                     "${context.resources.getResourceEntryName(firstCheckBox.id)} :  Required"
                 )
                 return false
             } else if (!subflag) return false
+
+            firstCheckBox.error = null
+            firstCheckBox.clearFocus()
             return true
         }
 
@@ -414,7 +420,7 @@ class Validator {
             toggleFlag: Boolean = true
         ): Boolean {
 
-            ValidatorError.clearError(view, (context as Activity))
+            ValidatorError.clearError(context as Activity)
 
             if (view.visibility == View.GONE || !view.isEnabled || (view.tag != null && view.tag == "-1")) {
                 return true
@@ -444,8 +450,8 @@ class Validator {
 
                 is CheckBox -> if (!emptyCheckBox(context, view, toggleFlag)) return false
 
-                is ViewGroup -> when {
-                    view.tag == "0" -> {
+                is ViewGroup -> when (view.tag) {
+                    "0" -> {
                         if (!emptyMultiCheckBox(context, view, toggleFlag)) {
                             return false
                         }

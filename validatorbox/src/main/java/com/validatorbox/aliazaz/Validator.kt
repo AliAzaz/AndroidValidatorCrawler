@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import com.edittextpicker.aliazaz.EditTextPicker
+import com.validatorbox.aliazaz.other.ValidatorError
 
 class Validator {
 
@@ -236,31 +237,6 @@ class Validator {
                 return false
             } else {
                 var rdbFlag: Boolean
-                /*for (j in 0 until rdGrp.childCount) {
-                    val innerV = rdGrp.getChildAt(j)
-
-                    if (innerV is RadioButton) {
-                        if (!innerV.isChecked) continue
-                    }
-
-                    if (innerV is EditText) {
-                        if (getIDComponent(rdGrp.findViewById(rdGrp.checkedRadioButtonId)) == innerV.getTag())
-                            rdbFlag = if (innerV is EditTextPicker)
-                                emptyEditTextPicker(
-                                    context,
-                                    innerV as EditText,
-                                    toggleFlag
-                                )
-                            else
-                                emptyTextBox(
-                                    context,
-                                    innerV,
-                                    toggleFlag
-                                )
-                    }
-                    if (!rdbFlag) break
-                }*/
-
                 val checkedRadio =
                     (context as Activity).findViewById<RadioButton>(rdGrp.checkedRadioButtonId)
                 val i = rdGrp.indexOfChild(checkedRadio)

@@ -1,4 +1,4 @@
-package com.validatorbox.aliazaz
+package com.validatorbox.aliazaz.other
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -12,8 +12,6 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import com.aliazaz.validatorbox.R
-import com.validatorbox.aliazaz.other.ErrorClass
-import com.validatorbox.aliazaz.other.PaddingClass
 
 internal object ValidatorError {
 
@@ -51,19 +49,6 @@ internal object ValidatorError {
     fun clearError(viewCom: View, activity: Activity = Activity()) {
 
         when {
-            /*error != null && error!!.id == viewCom.id -> {
-                ViewCompat.setBackground(viewCom, error!!.drawable)
-                viewCom.setPadding(
-                    error!!.padding.paddingLeft,
-                    error!!.padding.paddingTop,
-                    error!!.padding.paddingRight,
-                    error!!.padding.paddingBottom
-                )
-                if (viewCom is EditText) {
-                    error!!.prvcolor.let { viewCom.setTextColor(it) }
-                }
-                error = null
-            }*/
             error != null -> {
                 val view = activity.findViewById<View>(error!!.id)
                 ViewCompat.setBackground(view, error!!.drawable)

@@ -235,8 +235,8 @@ class Validator {
                 )
                 return false
             } else {
-                var rdbFlag = true
-                for (j in 0 until rdGrp.childCount) {
+                var rdbFlag: Boolean
+                /*for (j in 0 until rdGrp.childCount) {
                     val innerV = rdGrp.getChildAt(j)
 
                     if (innerV is RadioButton) {
@@ -259,9 +259,21 @@ class Validator {
                                 )
                     }
                     if (!rdbFlag) break
-                }
+                }*/
 
-//                rdGrp.checkedRadioButtonId
+                val checkedRadio =
+                    (context as Activity).findViewById<RadioButton>(rdGrp.checkedRadioButtonId)
+                val i = rdGrp.indexOfChild(checkedRadio)
+                rdbFlag =
+                    if (i + 1 == rdGrp.childCount || getIDComponent(checkedRadio) != rdGrp.getChildAt(
+                            i + 1
+                        ).tag
+                    )
+                        true
+                    else {
+                        val v = rdGrp.getChildAt(i + 1)
+                        emptyCheckingContainer(context, v, toggleFlag)
+                    }
 
                 return if (rdbFlag) {
                     rdBtn.error = null

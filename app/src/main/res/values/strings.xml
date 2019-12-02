@@ -5,14 +5,14 @@
     <string name="f102">Address</string>
     <string name="f103">Cell No</string>
     <string name="f104">City</string>
-    <string name="f105">Are you Married</string>
-    <string name="yes">Yes</string>
-    <string name="no">No</string>
+    <string name="f105">Gender</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
     <string name="f106">Check All Certifications</string>
     <string name="f106a">Goggle Certification</string>
     <string name="f106b">Oracle Certification</string>
     <string name="f106c">Microsoft Certification</string>
     <string name="f106d">Other</string>
-    <string name="f106e">None</string>
+    <string name="f106e">None of the above</string>
     <string name="submit">Submit Form</string>
 </resources>

@@ -291,7 +291,7 @@ class Validator {
             toggleFlag: Boolean = true
         ): Boolean {
             var flag = false
-            var subflag = false
+            var subflag = true
             lateinit var firstCheckBox: CheckBox
             for (i in 0 until container.childCount) {
                 val v = container.getChildAt(i)
@@ -451,19 +451,17 @@ class Validator {
                 is CheckBox -> if (!emptyCheckBox(context, view, toggleFlag)) return false
 
                 is ViewGroup -> when (view.tag) {
-                    "0" -> {
-                        if (!emptyMultiCheckBox(context, view, toggleFlag)) {
-                            return false
-                        }
+                    "0" -> if (!emptyMultiCheckBox(context, view, toggleFlag)) {
+                        return false
                     }
                     else -> {
 
                         loop@ for (i in 0 until view.childCount) {
                             val view = view.getChildAt(i)
 
-                            when {
-                                emptyCheckingContainer(context, view, toggleFlag) -> continue@loop
-                                else -> return false
+                            when (emptyCheckingContainer(context, view, toggleFlag)) {
+                                true -> continue@loop
+                                false -> return false
                             }
                         }
 
@@ -479,7 +477,7 @@ class Validator {
             val idName = view.resources.getResourceName(view.id)?.split("id/".toRegex())
                 ?.dropLastWhile { it.isEmpty() }
                 ?.toTypedArray()
-            return idName?.get(1) ?: ""
+            return idName?.get(1) + ":"
         }
 
         private fun getString(context: Context, idName: String): String {

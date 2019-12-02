@@ -101,14 +101,14 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="1dp"
-                                android:text="@string/yes" />
+                                android:text="@string/male" />
 
                             <RadioButton
                                 android:id="@+id/f105b"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="1dp"
-                                android:text="@string/no" />
+                                android:text="@string/female" />
 
 
                         </RadioGroup>

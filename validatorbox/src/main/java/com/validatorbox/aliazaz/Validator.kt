@@ -422,9 +422,7 @@ class Validator {
 
             ValidatorError.clearError(context as Activity)
 
-            if (view.visibility == View.GONE || !view.isEnabled || (view.tag != null && view.tag == "-1")) {
-                return true
-            }
+            if (view.visibility == View.GONE || !view.isEnabled || (view.tag != null && view.tag == "-1")) return true
 
             when (view) {
                 is RadioGroup -> {

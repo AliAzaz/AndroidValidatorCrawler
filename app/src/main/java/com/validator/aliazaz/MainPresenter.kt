@@ -13,11 +13,8 @@ class MainPresenter(
     MainInterface.presenterInterface {
 
     override fun onValidateForm(context: Context, view: View, flag: Boolean) {
-        mainInteractor.crawlingLayout(context, view, flag)
-    }
-
-    override fun onShowToast(msg: String) {
-        mainActivity.onShowToast(msg)
+        val output = mainInteractor.crawlingLayout(context, view, flag)
+        mainActivity.onShowToast(output)
     }
 
     override fun onCertificationListener(view: ViewGroup, flag: Boolean) {

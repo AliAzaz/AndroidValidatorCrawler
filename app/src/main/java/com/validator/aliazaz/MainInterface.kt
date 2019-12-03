@@ -7,19 +7,17 @@ import android.view.ViewGroup
 interface MainInterface {
 
     interface viewInterface {
-
-        fun onShowToast(msg: String)
+        fun onShowToast(putput: Boolean)
         fun onSubmitClick()
     }
 
     interface presenterInterface {
-        fun onValidateForm(context: Context, view: View, flag: Boolean)
-        fun onShowToast(msg: String)
+        fun onValidateForm(context: Context, view: View, flag: Boolean = true)
         fun onCertificationListener(view: ViewGroup, flag: Boolean)
     }
 
     interface modelInterface {
-        fun crawlingLayout(context: Context, view: View, flag: Boolean)
+        fun crawlingLayout(context: Context, view: View, flag: Boolean): Boolean
     }
 
 

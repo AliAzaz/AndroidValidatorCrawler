@@ -7,15 +7,15 @@ import com.validatorbox.aliazaz.Validator.Companion.emptyCheckingContainer
 
 class MainInteractor : MainInterface.modelInterface {
 
+    override fun crawlingLayout(context: Context, view: View, flag: Boolean): Boolean {
 
-    override fun crawlingLayout(context: Context, view: View, flag: Boolean) {
-
-        when (emptyCheckingContainer(context, view, flag)) {
+        return when (emptyCheckingContainer(context, view, flag)) {
 
             true -> {
                 clearAllFields(view)
-
+                true
             }
+            else -> false
 
         }
 

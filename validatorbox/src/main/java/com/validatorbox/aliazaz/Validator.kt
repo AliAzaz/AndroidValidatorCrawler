@@ -24,7 +24,7 @@ class Validator {
                     if (toggleFlag) {
                         Toast.makeText(
                             context,
-                            "ERROR(Empty): ${getString(context, getIDComponent(txt))}",
+                            "ERROR(Empty) ${getString(context, getIDComponent(txt))}",
                             Toast.LENGTH_SHORT
                         ).show()
                     }
@@ -48,7 +48,7 @@ class Validator {
                     if (toggleFlag) {
                         Toast.makeText(
                             context,
-                            "ERROR(Empty): ${getString(context, getIDComponent(txt))}",
+                            "ERROR(Empty) ${getString(context, getIDComponent(txt))}",
                             Toast.LENGTH_SHORT
                         ).show()
                     }
@@ -135,7 +135,7 @@ class Validator {
                 if (toggleFlag) {
                     Toast.makeText(
                         context,
-                        "ERROR(Invalid): ${getString(context, getIDComponent(txt))}",
+                        "ERROR(Invalid) ${getString(context, getIDComponent(txt))}",
                         Toast.LENGTH_SHORT
                     ).show()
                 }
@@ -168,7 +168,7 @@ class Validator {
                 if (toggleFlag) {
                     Toast.makeText(
                         context,
-                        "ERROR(Invalid): ${getString(context, getIDComponent(txt))}",
+                        "ERROR(Invalid) ${getString(context, getIDComponent(txt))}",
                         Toast.LENGTH_SHORT
                     ).show()
                 }
@@ -192,7 +192,7 @@ class Validator {
                     if (toggleFlag) {
                         Toast.makeText(
                             context,
-                            "ERROR(Empty): ${getString(context, getIDComponent(spin))}",
+                            "ERROR(Empty) ${getString(context, getIDComponent(spin))}",
                             Toast.LENGTH_SHORT
                         ).show()
                     }
@@ -222,7 +222,7 @@ class Validator {
                 if (toggleFlag) {
                     Toast.makeText(
                         context,
-                        "ERROR(Empty): ${getString(context, getIDComponent(rdGrp))}",
+                        "ERROR(Empty) ${getString(context, getIDComponent(rdGrp))}",
                         Toast.LENGTH_SHORT
                     ).show()
                 }
@@ -274,7 +274,7 @@ class Validator {
                     if (toggleFlag)
                         Toast.makeText(
                             context,
-                            "ERROR(Empty): ${getString(context, getIDComponent(cbx))}",
+                            "ERROR(Empty) ${getString(context, getIDComponent(cbx))}",
                             Toast.LENGTH_SHORT
                         ).show()
                     return false
@@ -325,7 +325,7 @@ class Validator {
                 if (toggleFlag)
                     Toast.makeText(
                         context,
-                        "ERROR(Empty): ${getString(context, getIDComponent(firstCheckBox))}",
+                        "ERROR(Empty) ${getString(context, getIDComponent(firstCheckBox))}",
                         Toast.LENGTH_SHORT
                     ).show()
                 firstCheckBox.error = "Required"    // Set Error
@@ -400,7 +400,7 @@ class Validator {
                 if (toggleFlag)
                     Toast.makeText(
                         context,
-                        "ERROR(Empty): ${getString(context, getIDComponent(firstCheckBox))}",
+                        "ERROR(Empty) ${getString(context, getIDComponent(firstCheckBox))}",
                         Toast.LENGTH_SHORT
                     ).show()
                 firstCheckBox.error = "Required"    // Set Error
@@ -477,7 +477,7 @@ class Validator {
             val idName = view.resources.getResourceName(view.id)?.split("id/".toRegex())
                 ?.dropLastWhile { it.isEmpty() }
                 ?.toTypedArray()
-            return idName?.get(1) + ":"
+            return idName?.get(1) + ""
         }
 
         private fun getString(context: Context, idName: String): String {

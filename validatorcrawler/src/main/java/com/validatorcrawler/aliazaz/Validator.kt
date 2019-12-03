@@ -1,4 +1,4 @@
-package com.validatorbox.aliazaz
+package com.validatorcrawler.aliazaz
 
 import android.app.Activity
 import android.content.Context
@@ -9,7 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import com.edittextpicker.aliazaz.EditTextPicker
-import com.validatorbox.aliazaz.other.ValidatorError
+import com.validatorcrawler.aliazaz.other.ValidatorError
 
 class Validator {
 

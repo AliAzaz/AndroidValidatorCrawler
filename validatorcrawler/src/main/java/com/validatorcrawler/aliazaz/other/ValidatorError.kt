@@ -1,4 +1,4 @@
-package com.validatorbox.aliazaz.other
+package com.validatorcrawler.aliazaz.other
 
 import android.annotation.SuppressLint
 import android.app.Activity

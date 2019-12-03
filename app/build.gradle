@@ -7,7 +7,7 @@ apply plugin: 'kotlin-android-extensions'
 android {
     compileSdkVersion 29
     defaultConfig {
-        applicationId "com.validator.aliazaz"
+        applicationId "com.validatorcrawler.aliazaz"
         minSdkVersion 16
         targetSdkVersion 29
         versionCode 1
@@ -37,5 +37,5 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
     implementation "com.github.AliAzaz:Edittext-Library:1.0.4"
 
-    implementation project(':validatorbox')
+    implementation project(':validatorcrawler')
 }

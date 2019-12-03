@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ValidatorBox</string>
+    <string name="app_name">ValidatorCrawler</string>
     <string name="info">PERSONAL INFORMATION</string>
     <string name="f101">Name</string>
     <string name="f102">Address</string>

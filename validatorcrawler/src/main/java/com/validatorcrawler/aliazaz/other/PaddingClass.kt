@@ -1,4 +1,4 @@
-package com.validatorbox.aliazaz.other
+package com.validatorcrawler.aliazaz.other
 
 internal data class PaddingClass(
     var paddingTop: Int = 0,

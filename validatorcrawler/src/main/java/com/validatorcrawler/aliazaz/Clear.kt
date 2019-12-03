@@ -1,4 +1,4 @@
-package com.validatorbox.aliazaz
+package com.validatorcrawler.aliazaz
 
 import android.view.View
 import android.view.ViewGroup

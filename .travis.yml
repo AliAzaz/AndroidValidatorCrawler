@@ -1,17 +1,20 @@
 language: android
+
 android:
   components:
-    - android-29
     - build-tools-29.0.2
+    - android-29
+    - tools
+    - platform-tools
+    - extra-android-m2repository
+  licenses:
+    - 'android-sdk-preview-license-.+'
+    - 'android-sdk-license-.+'
+    - 'google-gdk-license-.+'
 
 before_install:
+  - yes | sdkmanager "platforms;android-29"
   - chmod +x gradlew
 
-env:
-  global:
-    # install timeout in minutes (2 minutes by default)
-    - ADB_INSTALL_TIMEOUT=8
-
-# Run assemble and unit tests
 script:
-  - ./gradlew clean assembleDebug assembleRelease testDebug
+  - ./gradlew clean build

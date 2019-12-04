@@ -13,4 +13,4 @@ before_install:
   - chmod +x gradlew
 
 script:
-  - ./gradlew clean assembleDebug test lint
+  - ./gradlew clean assembleDebug assembleRelease testDebug

@@ -314,8 +314,8 @@ class Validator {
                             ).tag
                         )
                             continue
-                        val v = container.getChildAt(i + 1)
-                        subflag = emptyCheckingContainer(context, v, toggleFlag)
+                        subflag =
+                            emptyCheckingContainer(context, container.getChildAt(i + 1), toggleFlag)
                         if (!subflag) break
                     }
                 }
@@ -455,9 +455,7 @@ class Validator {
                     else -> {
 
                         loop@ for (i in 0 until view.childCount) {
-                            val view = view.getChildAt(i)
-
-                            when (emptyCheckingContainer(context, view, toggleFlag)) {
+                            when (emptyCheckingContainer(context, view.getChildAt(i), toggleFlag)) {
                                 true -> continue@loop
                                 false -> return false
                             }

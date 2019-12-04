@@ -7,7 +7,7 @@ import android.view.ViewGroup
 interface MainInterface {
 
     interface viewInterface {
-        fun onShowToast(putput: Boolean)
+        fun onShowToast(output: Boolean)
         fun onSubmitClick()
     }
 

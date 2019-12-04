@@ -16,5 +16,11 @@ before_install:
   - yes | sdkmanager "platforms;android-29"
   - chmod +x gradlew
 
+env:
+  global:
+    # install timeout in minutes (2 minutes by default)
+    - ADB_INSTALL_TIMEOUT=8
+
+# Run assemble and unit tests
 script:
   - ./gradlew clean assembleDebug assembleRelease testDebug

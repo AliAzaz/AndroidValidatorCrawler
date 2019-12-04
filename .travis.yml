@@ -4,6 +4,9 @@ android:
     - android-29
     - build-tools-29.0.2
 
+before_install:
+  - chmod +x gradlew
+
 env:
   global:
     # install timeout in minutes (2 minutes by default)

@@ -13,7 +13,7 @@
     <string name="f106b">Oracle</string>
     <string name="f106c">Microsoft</string>
     <string name="f106d">Sun Micro</string>
-    <string name="f106e">Other</string>
+    <string name="f106e">Other (Specify)</string>
     <string name="f106f">None of the above</string>
     <string name="submit">Submit Form</string>
 </resources>

@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity(), MainInterface.viewInterface {
         bi = DataBindingUtil.setContentView(this, R.layout.activity_main)
         bi.callback = this
 
-        bi.f106e.setOnCheckedChangeListener { _, b ->
+        bi.f106f.setOnCheckedChangeListener { _, b ->
             if (b) presenter.onCertificationListener(bi.fldGrppocfj01, false)
             else presenter.onCertificationListener(bi.fldGrppocfj01, true)
         }

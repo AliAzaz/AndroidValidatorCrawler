@@ -15,7 +15,8 @@ import com.aliazaz.validatorbox.R
 
 internal object ValidatorError {
 
-    private var error: ErrorClass? = null
+    var error: ErrorClass? = null
+        private set
 
     @SuppressLint("NewApi")
     fun putError(context: Context, viewCom: View) {
@@ -58,17 +59,16 @@ internal object ValidatorError {
                     error!!.padding.paddingRight,
                     error!!.padding.paddingBottom
                 )
+                view.clearFocus()
 
                 when (view) {
                     is EditText -> {
                         error!!.prvcolor.let { view.setTextColor(it) }
                         view.error = null
-                        view.clearFocus()
                     }
 
                     is CheckBox -> {
                         view.error = null
-                        view.clearFocus()
                     }
 
                     is Spinner -> {

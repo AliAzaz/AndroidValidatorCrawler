@@ -9,10 +9,11 @@
     <string name="male">Male</string>
     <string name="female">Female</string>
     <string name="f106">Check All Certifications</string>
-    <string name="f106a">Goggle Certification</string>
-    <string name="f106b">Oracle Certification</string>
-    <string name="f106c">Microsoft Certification</string>
-    <string name="f106d">Other</string>
-    <string name="f106e">None of the above</string>
+    <string name="f106a">Goggle</string>
+    <string name="f106b">Oracle</string>
+    <string name="f106c">Microsoft</string>
+    <string name="f106d">Sun Micro</string>
+    <string name="f106e">Other</string>
+    <string name="f106f">None of the above</string>
     <string name="submit">Submit Form</string>
 </resources>

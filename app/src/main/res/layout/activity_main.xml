@@ -136,46 +136,75 @@
                             android:orientation="vertical"
                             android:tag="0">
 
-                            <CheckBox
-                                android:id="@+id/f106a"
+                            <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="@string/f106a" />
+                                android:orientation="horizontal">
 
-                            <CheckBox
-                                android:id="@+id/f106b"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="@string/f106b" />
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="20"
+                                    android:orientation="vertical">
 
-                            <CheckBox
-                                android:id="@+id/f106c"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="@string/f106c" />
+                                    <CheckBox
+                                        android:id="@+id/f106a"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="@string/f106a" />
 
-                            <CheckBox
-                                android:id="@+id/f106d"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="@string/f106d" />
+                                    <CheckBox
+                                        android:id="@+id/f106b"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="@string/f106b" />
 
-                            <EditText
-                                android:id="@+id/f106dx"
-                                style="@style/EditText"
-                                android:hint="@string/f106d"
-                                android:tag="f106d"
-                                android:text='@{f106d.checked ? f106dx.getText().toString() : "" }'
-                                android:visibility='@{f106d.checked ? View.VISIBLE : View.GONE}' />
+                                    <CheckBox
+                                        android:id="@+id/f106e"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="@string/f106e" />
+
+                                    <EditText
+                                        android:id="@+id/f106ex"
+                                        style="@style/EditText"
+                                        android:hint="@string/f106e"
+                                        android:tag="f106e"
+                                        android:text='@{f106e.checked ? f106ex.getText().toString() : "" }'
+                                        android:visibility='@{f106e.checked ? View.VISIBLE : View.GONE}' />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="20"
+                                    android:orientation="vertical">
+
+                                    <CheckBox
+                                        android:id="@+id/f106c"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="@string/f106c" />
+
+                                    <CheckBox
+                                        android:id="@+id/f106d"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="@string/f106d" />
+
+
+                                </LinearLayout>
+
+                            </LinearLayout>
 
                         </LinearLayout>
 
                         <CheckBox
-                            android:id="@+id/f106e"
+                            android:id="@+id/f106f"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:tag="-1"
-                            android:text="@string/f106e" />
+                            android:text="@string/f106f" />
 
                     </LinearLayout>
 

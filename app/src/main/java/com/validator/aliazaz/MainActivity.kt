@@ -18,6 +18,8 @@ class MainActivity : AppCompatActivity(), MainInterface.viewInterface {
         bi = DataBindingUtil.setContentView(this, R.layout.activity_main)
         bi.callback = this
 
+        presenter.setTitle(getString(R.string.info))
+
         bi.f106f.setOnCheckedChangeListener { _, b ->
             if (b) presenter.onCertificationListener(bi.fldGrppocfj01, false)
             else presenter.onCertificationListener(bi.fldGrppocfj01, true)
@@ -30,7 +32,10 @@ class MainActivity : AppCompatActivity(), MainInterface.viewInterface {
     }
 
     override fun onShowToast(output: Boolean) {
-        if (output) Toast.makeText(this, "Form Submitted Successfully!!", Toast.LENGTH_SHORT).show()
+        if (output) {
+            Toast.makeText(this, "Form Submitted Successfully!!", Toast.LENGTH_SHORT).show()
+            presenter.onHideKeyboard()
+        }
     }
 
     override fun onSubmitClick() {

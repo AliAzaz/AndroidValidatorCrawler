@@ -21,5 +21,11 @@ class MainPresenter(
         clearCheckBoxes(view, flag)
     }
 
+    override fun onHideKeyboard() {
+        mainInteractor.keyboardHide(mainActivity)
+    }
 
+    override fun setTitle(title: String) {
+        mainActivity.title = title
+    }
 }

@@ -2,15 +2,13 @@ package com.validatorcrawler.aliazaz
 
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CheckBox
-import android.widget.EditText
-import android.widget.RadioButton
-import android.widget.RadioGroup
+import android.widget.*
 
 
 class Clear {
     companion object {
 
+        @JvmOverloads
         @JvmStatic
         fun clearCheckBoxes(container: ViewGroup, flag: Boolean? = null) {
             for (i in 0 until container.childCount) {
@@ -25,6 +23,7 @@ class Clear {
             }
         }
 
+        @JvmOverloads
         @JvmStatic
         fun clearRadioGroup(view: RadioGroup, flag: Boolean? = null) {
             view.clearCheck()
@@ -39,6 +38,7 @@ class Clear {
             }
         }
 
+        @JvmOverloads
         @JvmStatic
         fun clearAllFields(view: View, flag: Boolean? = null) {
             when (view) {
@@ -51,6 +51,12 @@ class Clear {
                 }
 
                 is CheckBox -> {
+                    view.isChecked = false
+                    view.error = null
+                    flag?.let { view.setEnabled(flag) }
+                }
+
+                is Switch -> {
                     view.isChecked = false
                     view.error = null
                     flag?.let { view.setEnabled(flag) }

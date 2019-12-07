@@ -15,6 +15,7 @@ class Validator {
 
     companion object {
 
+        @JvmOverloads
         @JvmStatic
         fun emptyTextBox(context: Context, txt: EditText, toggleFlag: Boolean = true): Boolean {
             return when {
@@ -40,6 +41,7 @@ class Validator {
             }
         }
 
+        @JvmOverloads
         @JvmStatic
         fun emptyTextView(context: Context, txt: TextView, toggleFlag: Boolean = true): Boolean {
             return when {
@@ -64,6 +66,7 @@ class Validator {
             }
         }
 
+        @JvmOverloads
         @JvmStatic
         fun emptyCustomTextBox(
             context: Context,
@@ -84,6 +87,7 @@ class Validator {
             return false
         }
 
+        @JvmOverloads
         @JvmStatic
         fun emptyEditTextPicker(
             context: Context,
@@ -120,6 +124,7 @@ class Validator {
             } else true
         }
 
+        @JvmOverloads
         @JvmStatic
         fun rangeTextBox(
             context: Context,
@@ -150,6 +155,7 @@ class Validator {
 
         }
 
+        @JvmOverloads
         @JvmStatic
         fun rangeTextBox(
             context: Context,
@@ -184,6 +190,7 @@ class Validator {
 
         }
 
+        @JvmOverloads
         @JvmStatic
         fun emptySpinner(context: Context, spin: Spinner, toggleFlag: Boolean = true): Boolean {
             return when {
@@ -210,6 +217,7 @@ class Validator {
             }
         }
 
+        @JvmOverloads
         @JvmStatic
         fun emptyRadioButton(
             context: Context,
@@ -261,6 +269,7 @@ class Validator {
             }
         }
 
+        @JvmOverloads
         @JvmStatic
         fun emptyCheckBox(
             context: Context,
@@ -284,6 +293,7 @@ class Validator {
 
         }
 
+        @JvmOverloads
         @JvmStatic
         fun emptyMultiCheckBox(
             context: Context,
@@ -352,56 +362,7 @@ class Validator {
             return true
         }
 
-
-        private fun emptyMultiCheckBox02(
-            context: Context,
-            container: ViewGroup
-        ): Boolean {
-            var flag = false
-            var subflag = true
-            for (i in 0 until container.childCount) {
-                val v = container.getChildAt(i)
-                if (v is ViewGroup)
-                    if (emptyMultiCheckBox02(context, v)) {
-                        flag = true
-                    } else {
-                        if (ValidatorError.error == null) continue
-                        val view =
-                            (context as Activity).findViewById<View>(ValidatorError.error!!.id)
-                        if (view !is CheckBox) {
-                            flag = false
-                            break
-                        }
-                    }
-                if (v is CheckBox) {
-                    v.error = null
-
-                    if (!v.isEnabled) {
-                        flag = true
-                        continue
-                    } else {
-                        if (!flag)
-                            flag = false
-                    }
-
-                    if (v.isChecked) {
-                        flag = true
-                        if (i + 1 == container.childCount || getIDComponent(v) != container.getChildAt(
-                                i + 1
-                            ).tag
-                        )
-                            continue
-                        subflag =
-                            emptyCheckingContainer(context, container.getChildAt(i + 1), false)
-                        if (!subflag) break
-                    }
-                }
-            }
-            if (!flag) return false
-            else if (!subflag) return false
-            return true
-        }
-
+        @JvmOverloads
         @JvmStatic
         fun emptyCheckingContainer(
             context: Context,
@@ -455,6 +416,55 @@ class Validator {
 
             }
 
+            return true
+        }
+
+        private fun emptyMultiCheckBox02(
+            context: Context,
+            container: ViewGroup
+        ): Boolean {
+            var flag = false
+            var subflag = true
+            for (i in 0 until container.childCount) {
+                val v = container.getChildAt(i)
+                if (v is ViewGroup)
+                    if (emptyMultiCheckBox02(context, v)) {
+                        flag = true
+                    } else {
+                        if (ValidatorError.error == null) continue
+                        val view =
+                            (context as Activity).findViewById<View>(ValidatorError.error!!.id)
+                        if (view !is CheckBox) {
+                            flag = false
+                            break
+                        }
+                    }
+                if (v is CheckBox) {
+                    v.error = null
+
+                    if (!v.isEnabled) {
+                        flag = true
+                        continue
+                    } else {
+                        if (!flag)
+                            flag = false
+                    }
+
+                    if (v.isChecked) {
+                        flag = true
+                        if (i + 1 == container.childCount || getIDComponent(v) != container.getChildAt(
+                                i + 1
+                            ).tag
+                        )
+                            continue
+                        subflag =
+                            emptyCheckingContainer(context, container.getChildAt(i + 1), false)
+                        if (!subflag) break
+                    }
+                }
+            }
+            if (!flag) return false
+            else if (!subflag) return false
             return true
         }
 

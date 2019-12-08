@@ -40,5 +40,5 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation "com.github.AliAzaz:Edittext-Library:1.0.4"
 
-    implementation project(':validatorcrawler')
+    implementation project(':validatorcrawlerx')
 }

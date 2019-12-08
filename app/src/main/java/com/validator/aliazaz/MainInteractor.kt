@@ -4,8 +4,8 @@ import android.app.Activity
 import android.content.Context
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import com.validatorcrawler.aliazaz.Clear.Companion.clearAllFields
-import com.validatorcrawler.aliazaz.Validator.Companion.emptyCheckingContainer
+import com.validatorcrawlerx.aliazaz.Clear.Companion.clearAllFields
+import com.validatorcrawlerx.aliazaz.Validator.Companion.emptyCheckingContainer
 
 
 class MainInteractor : MainInterface.modelInterface {

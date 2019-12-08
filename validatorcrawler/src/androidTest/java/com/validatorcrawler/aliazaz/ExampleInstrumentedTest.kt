@@ -1,6 +1,6 @@
-package com.validatorcrawlerx.aliazaz
+package com.validatorcrawler.aliazaz
 
-import androidx.test.platform.app.InstrumentationRegistry
+import androidx.test.InstrumentationRegistry
 import androidx.test.runner.AndroidJUnit4
 import org.junit.Assert.assertEquals
 import org.junit.Test
@@ -17,6 +17,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.validatorcrawlerx.aliazaz.test", appContext.packageName)
+        assertEquals("com.validatorcrawler.aliazaz.test", appContext.packageName)
     }
 }

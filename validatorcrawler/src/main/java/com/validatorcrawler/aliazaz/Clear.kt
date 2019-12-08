@@ -30,6 +30,7 @@ class Clear {
             for (i in 0 until view.childCount) {
                 when (val v: View = view.getChildAt(i)) {
                     is RadioButton -> {
+                        v.clearFocus()
                         v.error = null
                         flag?.let { v.setEnabled(flag) }
                     }

@@ -1,4 +1,4 @@
-package com.validatorcrawlerx.aliazaz.other
+package com.validatorcrawler.aliazaz.other
 
 import android.graphics.drawable.Drawable
 

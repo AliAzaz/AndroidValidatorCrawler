@@ -1,4 +1,4 @@
-package com.validatorcrawlerx.aliazaz.other
+package com.validatorcrawler.aliazaz.other
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -11,7 +11,7 @@ import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.Spinner
 import android.widget.TextView
-import com.validatorcrawlerx.aliazaz.R
+import com.validatorcrawler.aliazaz.R
 
 internal object ValidatorError {
 

@@ -3,7 +3,7 @@ package com.validator.aliazaz
 import android.content.Context
 import android.view.View
 import android.view.ViewGroup
-import com.validatorcrawlerx.aliazaz.Clear.Companion.clearCheckBoxes
+import com.validatorcrawler.aliazaz.Clear.Companion.clearCheckBoxes
 
 class MainPresenter(
     private val mainActivity: MainActivity,

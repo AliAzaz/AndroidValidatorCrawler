@@ -2,17 +2,17 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 android {
-    compileSdkVersion 29
-    buildToolsVersion "29.0.2"
+    compileSdkVersion 28
+    buildToolsVersion '28.0.3'
 
 
     defaultConfig {
         minSdkVersion 16
-        targetSdkVersion 29
+        targetSdkVersion 28
         versionCode 1
         versionName "0.0.2"
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
     }
 
@@ -23,24 +23,26 @@ android {
         }
     }
 
+    lintOptions {
+        abortOnError false
+    }
+
 }
 
 ext {
     edittextpicker = '1.0.4'
-    appcompat = '1.1.0'
-    espresso = '3.2.0'
-    test = '1.2.0'
-    coreKtx = '1.1.0'
+    appcompat = '28.0.0'
+    espresso = '3.0.2'
+    test = '1.0.2'
     junit = '4.12'
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation "androidx.appcompat:appcompat:$appcompat"
-    implementation "androidx.core:core-ktx:$coreKtx"
+    implementation "com.android.support:appcompat-v7:$appcompat"
     testImplementation "junit:junit:$junit"
-    androidTestImplementation "androidx.test:runner:$test"
-    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso"
+    androidTestImplementation "com.android.support.test:runner:$test"
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:$espresso"
     implementation "com.github.AliAzaz:Edittext-Library:$edittextpicker"
 }

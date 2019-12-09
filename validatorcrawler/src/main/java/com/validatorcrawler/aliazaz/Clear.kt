@@ -6,6 +6,7 @@ import android.widget.*
 
 
 class Clear {
+
     companion object {
 
         @JvmOverloads

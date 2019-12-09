@@ -29,7 +29,7 @@ class Validator {
                             Toast.LENGTH_SHORT
                         ).show()
                     }
-                    txt.error = "Required"    // Set Error on last radio button
+                    txt.error = "Required"
                     txt.requestFocus()
                     Log.i(
                         context.javaClass.name,
@@ -54,7 +54,7 @@ class Validator {
                             Toast.LENGTH_SHORT
                         ).show()
                     }
-                    txt.error = "Required"    // Set Error on last radio button
+                    txt.error = "Required"
                     txt.requestFocus()
                     Log.i(
                         context.javaClass.name,
@@ -144,7 +144,7 @@ class Validator {
                         Toast.LENGTH_SHORT
                     ).show()
                 }
-                txt.error = "Range is $min to $max ($type)"    // Set Error on last radio button
+                txt.error = "Range is $min to $max ($type)"
                 txt.requestFocus()
                 Log.i(
                     context.javaClass.name,
@@ -179,7 +179,7 @@ class Validator {
                     ).show()
                 }
                 txt.error =
-                    "Range is $min to $max (${type.let { "for $it" }})"    // Set Error on last radio button
+                    "Range is $min to $max (${type.let { "for $it" }})"
                 txt.requestFocus()
                 Log.i(
                     context.javaClass.name,
@@ -234,7 +234,7 @@ class Validator {
                         Toast.LENGTH_SHORT
                     ).show()
                 }
-                rdBtn.error = "Required"    // Set Error on last radio button
+                rdBtn.error = "Required"
                 rdBtn.isFocusable = true
                 rdBtn.isFocusableInTouchMode = true
                 rdBtn.requestFocus()

@@ -1,4 +1,4 @@
-package com.validatorcrawlerx.aliazaz
+package com.validatorcrawler.aliazaz
 
 import org.junit.Assert.assertEquals
 import org.junit.Test

@@ -1,2 +1,2 @@
-include ':app', ':validatorcrawler', ':validatorcrawlerx'
+include ':app',':validatorcrawlerx'
 rootProject.name='ValidatorBox'

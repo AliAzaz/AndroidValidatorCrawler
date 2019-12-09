@@ -2,8 +2,8 @@ language: android
 
 android:
   components:
-    - android-29
-    - build-tools-29.0.2
+    - android-28
+    - build-tools-28.0.3
     - tools
     - platform-tools
     - extra-android-m2repository

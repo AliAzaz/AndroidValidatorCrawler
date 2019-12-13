@@ -58,6 +58,11 @@ class Clear {
                     flag?.let { view.setEnabled(flag) }
                 }
 
+                is Spinner -> {
+                    view.setSelection(0)
+                    flag?.let { view.setEnabled(flag) }
+                }
+
                 is Switch -> {
                     view.isChecked = false
                     view.error = null

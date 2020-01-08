@@ -55,6 +55,10 @@ Implement Clear:
     Clear.clearAllFields(fldGrpSecA01);
 
 ## OUTPUT📇
+```sh
+Removed required error tag from RadioGroup
+```
+
 ![](https://github.com/AliAzaz/AndroidValidatorCrawler/blob/master/output.gif)
 
 

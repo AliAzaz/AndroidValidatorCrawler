@@ -4,8 +4,8 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.graphics.Color
-import android.support.v4.content.ContextCompat
-import android.support.v4.view.ViewCompat
+import androidx.core.content.ContextCompat
+import androidx.core.view.ViewCompat
 import android.view.View
 import android.widget.CheckBox
 import android.widget.EditText

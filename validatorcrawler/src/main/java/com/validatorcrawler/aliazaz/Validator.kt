@@ -234,7 +234,7 @@ class Validator {
                         Toast.LENGTH_SHORT
                     ).show()
                 }
-                rdBtn.error = "Required"
+//                rdBtn.error = "Required"
                 rdBtn.isFocusable = true
                 rdBtn.isFocusableInTouchMode = true
                 rdBtn.requestFocus()

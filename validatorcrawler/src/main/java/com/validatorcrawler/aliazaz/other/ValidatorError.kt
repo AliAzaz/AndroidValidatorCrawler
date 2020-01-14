@@ -4,13 +4,13 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.graphics.Color
-import androidx.core.content.ContextCompat
-import androidx.core.view.ViewCompat
 import android.view.View
 import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.Spinner
 import android.widget.TextView
+import androidx.core.content.ContextCompat
+import androidx.core.view.ViewCompat
 import com.validatorcrawler.aliazaz.R
 
 internal object ValidatorError {
@@ -24,6 +24,7 @@ internal object ValidatorError {
         when (error) {
             null -> {
                 error = ErrorClass(
+                    context::class.java.name,
                     viewCom.background,
                     padding = PaddingClass(
                         viewCom.paddingTop,
@@ -50,7 +51,7 @@ internal object ValidatorError {
     fun clearError(activity: Activity = Activity()) {
 
         when {
-            error != null -> {
+            error != null && error!!.activityName == activity::class.java.name -> {
                 val view = activity.findViewById<View>(error!!.id)
                 ViewCompat.setBackground(view, error!!.drawable)
                 view.setPadding(
@@ -79,6 +80,7 @@ internal object ValidatorError {
 
                 error = null
             }
+            error != null && error!!.activityName != activity::class.java.name -> error = null
         }
 
     }

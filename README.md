@@ -1,7 +1,7 @@
 # Powerful Android Validator Crawaler⚔
 Validator box library that can inspect any type of form, provides multiple validation functions with an inclusion of clearing views(❁´◡`❁)
 
-[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Powerful%20Android%20Validator%20Crawaler-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/8077) [![Build Status](https://travis-ci.com/AliAzaz/AndroidValidatorCrawler.svg?branch=master)](https://travis-ci.com/AliAzaz/AndroidValidatorCrawler) [![](https://jitpack.io/v/AliAzaz/AndroidValidatorCrawler.svg)](https://jitpack.io/#AliAzaz/AndroidValidatorCrawler) [![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT)
+[![Build Status](https://travis-ci.com/AliAzaz/AndroidValidatorCrawler.svg?branch=master)](https://travis-ci.com/AliAzaz/AndroidValidatorCrawler) [![](https://jitpack.io/v/AliAzaz/AndroidValidatorCrawler.svg)](https://jitpack.io/#AliAzaz/AndroidValidatorCrawler) [![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT) [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Powerful%20Android%20Validator%20Crawaler-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/8077) 
 
 Validator Crawler, that would help the developers to get two different functionalities i.e validate and clear.
 

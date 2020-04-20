@@ -379,8 +379,10 @@ class Validator {
                     var radioFlag = false
                     lateinit var v: RadioButton
                     for (j in 0 until view.childCount) {
-                        if (view.getChildAt(j) is RadioButton) {
-                            v = view.getChildAt(j) as RadioButton
+                        val subView = view.getChildAt(j)
+                        if (subView.visibility == View.GONE || !subView.isEnabled || (subView.tag != null && subView.tag == "-1")) return true
+                        if (subView is RadioButton) {
+                            v = subView
                             radioFlag = true
                             break
                         }

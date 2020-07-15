@@ -1,6 +1,6 @@
-package com.validatorcrawler.aliazaz.other
+package com.validatorcrawler.aliazaz.models
 
-internal data class PaddingClass(
+internal data class PaddingModel(
     var paddingTop: Int = 0,
     var paddingStart: Int = 0,
     var paddingRight: Int = 0,

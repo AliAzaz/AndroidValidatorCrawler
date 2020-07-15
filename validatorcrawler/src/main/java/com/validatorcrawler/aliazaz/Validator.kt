@@ -9,7 +9,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import com.edittextpicker.aliazaz.EditTextPicker
-import com.validatorcrawler.aliazaz.other.ValidatorError
+import com.validatorcrawler.aliazaz.utils.ValidatorErrorUtils
+import com.validatorcrawler.aliazaz.utils.getIDComponent
+import com.validatorcrawler.aliazaz.utils.getString
+import com.validatorcrawler.aliazaz.utils.getVisibilityFlag
 
 class Validator {
 
@@ -21,7 +24,7 @@ class Validator {
             return when {
                 txt is EditTextPicker -> return emptyEditTextPicker(context, txt, toggleFlag)
                 TextUtils.isEmpty(txt.text.toString()) -> {
-                    ValidatorError.putError(context, txt)
+                    ValidatorErrorUtils.putError(context, txt)
                     if (toggleFlag) {
                         Toast.makeText(
                             context,
@@ -46,7 +49,7 @@ class Validator {
         fun emptyTextView(context: Context, txt: TextView, toggleFlag: Boolean = true): Boolean {
             return when {
                 TextUtils.isEmpty(txt.text.toString()) -> {
-                    ValidatorError.putError(context, txt)
+                    ValidatorErrorUtils.putError(context, txt)
                     if (toggleFlag) {
                         Toast.makeText(
                             context,
@@ -74,7 +77,7 @@ class Validator {
             msg: String,
             toggleFlag: Boolean = true
         ): Boolean {
-            ValidatorError.putError(context, txt)
+            ValidatorErrorUtils.putError(context, txt)
             if (toggleFlag)
                 Toast.makeText(context, "ERROR: $msg", Toast.LENGTH_SHORT).show()
             txt.error = msg
@@ -108,7 +111,7 @@ class Validator {
             }
 
             return if (!flag) {
-                ValidatorError.putError(context, txt)
+                ValidatorErrorUtils.putError(context, txt)
                 if (toggleFlag) {
                     Toast.makeText(
                         context,
@@ -136,7 +139,7 @@ class Validator {
         ): Boolean {
 
             return if (Integer.valueOf(txt.text.toString()) < min || Integer.valueOf(txt.text.toString()) > max) {
-                ValidatorError.putError(context, txt)
+                ValidatorErrorUtils.putError(context, txt)
                 if (toggleFlag) {
                     Toast.makeText(
                         context,
@@ -170,7 +173,7 @@ class Validator {
                     txt.text.toString()
                 ) > max
             ) {
-                ValidatorError.putError(context, txt)
+                ValidatorErrorUtils.putError(context, txt)
                 if (toggleFlag) {
                     Toast.makeText(
                         context,
@@ -195,7 +198,7 @@ class Validator {
         fun emptySpinner(context: Context, spin: Spinner, toggleFlag: Boolean = true): Boolean {
             return when {
                 (spin.selectedItemPosition == 0) -> {
-                    ValidatorError.putError(context, spin)
+                    ValidatorErrorUtils.putError(context, spin)
                     if (toggleFlag) {
                         Toast.makeText(
                             context,
@@ -226,7 +229,7 @@ class Validator {
             toggleFlag: Boolean = true
         ): Boolean {
             if (rdGrp.checkedRadioButtonId == -1) {
-                ValidatorError.putError(context, rdGrp)
+                ValidatorErrorUtils.putError(context, rdGrp)
                 if (toggleFlag) {
                     Toast.makeText(
                         context,
@@ -234,7 +237,6 @@ class Validator {
                         Toast.LENGTH_SHORT
                     ).show()
                 }
-//                rdBtn.error = "Required"
                 rdBtn.isFocusable = true
                 rdBtn.isFocusableInTouchMode = true
                 rdBtn.requestFocus()
@@ -244,7 +246,7 @@ class Validator {
                 )
                 return false
             } else {
-                var rdbFlag: Boolean
+                val rdbFlag: Boolean
                 val checkedRadio =
                     (context as Activity).findViewById<RadioButton>(rdGrp.checkedRadioButtonId)
                 val i = rdGrp.indexOfChild(checkedRadio)
@@ -278,7 +280,7 @@ class Validator {
         ): Boolean {
             return when {
                 !cbx.isChecked -> {
-                    ValidatorError.putError(context, cbx)
+                    ValidatorErrorUtils.putError(context, cbx)
                     cbx.error = getString(context, getIDComponent(cbx))
                     if (toggleFlag)
                         Toast.makeText(
@@ -308,9 +310,9 @@ class Validator {
                     if (emptyMultiCheckBox02(context, v)) {
                         flag = true
                     } else {
-                        if (ValidatorError.error == null) continue
+                        if (ValidatorErrorUtils.error == null) continue
                         val view =
-                            (context as Activity).findViewById<View>(ValidatorError.error!!.id)
+                            (context as Activity).findViewById<View>(ValidatorErrorUtils.error!!.id)
                         if (view !is CheckBox) {
                             flag = false
                             break
@@ -341,7 +343,7 @@ class Validator {
                 }
             }
             if (!flag) {
-                ValidatorError.putError(context, container)
+                ValidatorErrorUtils.putError(context, container)
                 if (toggleFlag)
                     Toast.makeText(
                         context,
@@ -370,9 +372,9 @@ class Validator {
             toggleFlag: Boolean = true
         ): Boolean {
 
-            ValidatorError.clearError(context as Activity)
+            ValidatorErrorUtils.clearError(context as Activity)
 
-            if (view.visibility == View.GONE || !view.isEnabled || (view.tag != null && view.tag == "-1")) return true
+            if (getVisibilityFlag(view)) return true
 
             when (view) {
                 is RadioGroup -> {
@@ -380,8 +382,9 @@ class Validator {
                     lateinit var v: RadioButton
                     for (j in 0 until view.childCount) {
                         val subView = view.getChildAt(j)
-                        if (subView.visibility == View.GONE || !subView.isEnabled || (subView.tag != null && subView.tag == "-1")) return true
-                        if (subView is RadioButton) {
+                        val subRadioFlag = getVisibilityFlag(subView)
+//                        if (subView !is RadioButton && subRadioFlag) return true
+                        if (subView is RadioButton && !subRadioFlag) {
                             v = subView
                             radioFlag = true
                             break
@@ -433,9 +436,9 @@ class Validator {
                     if (emptyMultiCheckBox02(context, v)) {
                         flag = true
                     } else {
-                        if (ValidatorError.error == null) continue
+                        if (ValidatorErrorUtils.error == null) continue
                         val view =
-                            (context as Activity).findViewById<View>(ValidatorError.error!!.id)
+                            (context as Activity).findViewById<View>(ValidatorErrorUtils.error!!.id)
                         if (view !is CheckBox) {
                             flag = false
                             break
@@ -468,18 +471,6 @@ class Validator {
             if (!flag) return false
             else if (!subflag) return false
             return true
-        }
-
-        private fun getIDComponent(view: View): String {
-            val idName = view.resources.getResourceName(view.id)?.split("id/".toRegex())
-                ?.dropLastWhile { it.isEmpty() }
-                ?.toTypedArray()
-            return idName?.get(1) + ""
-        }
-
-        private fun getString(context: Context, idName: String): String {
-            val res = context.resources.getIdentifier(idName, "string", context.packageName)
-            return if (res != 0) context.getString(res) else ""
         }
 
     }

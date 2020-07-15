@@ -1,11 +1,11 @@
-package com.validatorcrawler.aliazaz.other
+package com.validatorcrawler.aliazaz.models
 
 import android.graphics.drawable.Drawable
 
-internal data class ErrorClass(
+internal data class ErrorModel(
     var activityName: String,
     var drawable: Drawable? = null,
-    var padding: PaddingClass = PaddingClass(),
+    var padding: PaddingModel = PaddingModel(),
     var prvcolor: Int = 0,
     var id: Int = 0
 )

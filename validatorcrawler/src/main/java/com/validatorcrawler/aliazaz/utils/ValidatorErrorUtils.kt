@@ -1,4 +1,4 @@
-package com.validatorcrawler.aliazaz.other
+package com.validatorcrawler.aliazaz.utils
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -12,10 +12,12 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import com.validatorcrawler.aliazaz.R
+import com.validatorcrawler.aliazaz.models.ErrorModel
+import com.validatorcrawler.aliazaz.models.PaddingModel
 
-internal object ValidatorError {
+internal object ValidatorErrorUtils {
 
-    var error: ErrorClass? = null
+    var error: ErrorModel? = null
         private set
 
     @SuppressLint("NewApi")
@@ -23,10 +25,10 @@ internal object ValidatorError {
 
         when (error) {
             null -> {
-                error = ErrorClass(
+                error = ErrorModel(
                     context::class.java.name,
                     viewCom.background,
-                    padding = PaddingClass(
+                    padding = PaddingModel(
                         viewCom.paddingTop,
                         viewCom.paddingStart,
                         viewCom.paddingRight,

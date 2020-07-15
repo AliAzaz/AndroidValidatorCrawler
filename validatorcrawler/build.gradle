@@ -3,14 +3,14 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 android {
     compileSdkVersion 29
-    buildToolsVersion '29.0.2'
+    buildToolsVersion '29.0.3'
 
 
     defaultConfig {
         minSdkVersion 16
         targetSdkVersion 29
         versionCode 1
-        versionName "1.0.2"
+        versionName "1.0.3"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
@@ -34,7 +34,7 @@ ext {
     appcompat = '1.1.0'
     espresso = '3.2.0'
     test = '1.1.1'
-    junit = '4.12'
+    junit = '4.13'
 }
 
 dependencies {

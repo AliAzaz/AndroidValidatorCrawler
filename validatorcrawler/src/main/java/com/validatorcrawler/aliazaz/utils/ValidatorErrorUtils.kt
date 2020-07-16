@@ -23,6 +23,8 @@ internal object ValidatorErrorUtils {
     @SuppressLint("NewApi")
     fun putError(context: Context, viewCom: View) {
 
+        clearError(context as Activity)
+
         when (error) {
             null -> {
                 error = ErrorModel(

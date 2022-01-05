@@ -9,7 +9,7 @@ import com.validator.aliazaz.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity(), MainInterface.viewInterface {
 
-    lateinit var bi: ActivityMainBinding
+    private lateinit var bi: ActivityMainBinding
     private val presenter: MainPresenter = MainPresenter(this, MainInteractor())
 
     override fun onCreate(savedInstanceState: Bundle?) {

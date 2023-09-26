@@ -1,14 +1,15 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
+//apply plugin: 'kotlin-parcelize'
+
 android {
-    compileSdkVersion 29
-    buildToolsVersion '29.0.3'
+    compileSdkVersion 32
+//    buildToolsVersion '29.0.3'
 
 
     defaultConfig {
-        minSdkVersion 16
-        targetSdkVersion 29
+        minSdkVersion 22
+        targetSdkVersion 32
         versionCode 1
         versionName "1.0.3"
 
@@ -23,6 +24,10 @@ android {
         }
     }
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
     lintOptions {
         abortOnError false
     }
@@ -31,15 +36,15 @@ android {
 
 ext {
     edittextpicker = '2.0.0'
-    appcompat = '1.1.0'
-    espresso = '3.2.0'
-    test = '1.1.1'
+    appcompat = '1.5.1'
+    espresso = '3.5.1'
+    test = '1.1.5'
     junit = '4.13'
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     implementation "androidx.appcompat:appcompat:$appcompat"
     testImplementation "junit:junit:$junit"
     androidTestImplementation "androidx.test.ext:junit:$test"

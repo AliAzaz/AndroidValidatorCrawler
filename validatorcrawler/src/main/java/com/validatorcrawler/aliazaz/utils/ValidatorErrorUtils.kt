@@ -46,7 +46,7 @@ internal object ValidatorErrorUtils {
                     //Set new color
                     viewCom.setTextColor(Color.parseColor("#D8000C"))
                 }
-                viewCom.background = ContextCompat.getDrawable(context, R.drawable.image_102)
+                viewCom.background = ContextCompat.getDrawable(context, R.drawable.image_103)
             }
         }
 

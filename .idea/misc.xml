@@ -1,4 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" project-jdk-name="1.8" project-jdk-type="JavaSDK" />
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/OmarShoaib/Android_Projects/AndroidValidatorCrawler/app/src/main/res/layout/activity_main.xml" value="0.26481481481481484" />
+        <entry key="..\:/OmarShoaib/Android_Projects/AndroidValidatorCrawler/app/src/main/res/layout/activity_main2.xml" value="0.36614583333333334" />
+        <entry key="..\:/OmarShoaib/Android_Projects/AndroidValidatorCrawler/app/src/main/res/layout/fragment_first.xml" value="0.25677083333333334" />
+        <entry key="..\:/OmarShoaib/Android_Projects/AndroidValidatorCrawler/app/src/main/res/layout/fragment_second.xml" value="0.25677083333333334" />
+        <entry key="..\:/OmarShoaib/Android_Projects/AndroidValidatorCrawler/validatorcrawler/src/main/res/drawable/bg_error.xml" value="0.114" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK" />
 </project>

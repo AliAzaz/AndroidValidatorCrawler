@@ -1,10 +1,10 @@
 package com.validator.aliazaz
 
-import androidx.databinding.DataBindingUtil
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import com.validator.aliazaz.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity(), MainInterface.viewInterface {
@@ -24,7 +24,6 @@ class MainActivity : AppCompatActivity(), MainInterface.viewInterface {
             if (b) presenter.onCertificationListener(bi.fldGrppocfj01, false)
             else presenter.onCertificationListener(bi.fldGrppocfj01, true)
         }
-
     }
 
     fun btnSubmit(view: View) {

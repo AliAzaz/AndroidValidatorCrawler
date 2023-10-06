@@ -1,10 +1,13 @@
 package com.validator.aliazaz
 
 import android.os.Bundle
+import android.text.InputType
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import com.edittextpicker.aliazaz.EditTextPicker
+import com.edittextpicker.aliazaz.repository.EditTextPickerBuilder
 import com.validator.aliazaz.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity(), MainInterface.viewInterface {
@@ -20,10 +23,13 @@ class MainActivity : AppCompatActivity(), MainInterface.viewInterface {
 
         presenter.setTitle(getString(R.string.info))
 
+        setCustomEditText()
+
         bi.f106f.setOnCheckedChangeListener { _, b ->
             if (b) presenter.onCertificationListener(bi.fldGrppocfj01, false)
             else presenter.onCertificationListener(bi.fldGrppocfj01, true)
         }
+
     }
 
     fun btnSubmit(view: View) {
@@ -39,5 +45,19 @@ class MainActivity : AppCompatActivity(), MainInterface.viewInterface {
 
     override fun onSubmitClick() {
         presenter.onValidateForm(this, bi.formValidateLayout)
+    }
+
+    override fun setCustomEditText() {
+        val txtPicker = EditTextPicker(this, EditTextPickerBuilder().apply {
+            setRequired(true)
+            setRangeValues(0.5f, 40.0f)
+            setMask("##.##")
+            setPattern("^(\\d{2,2}\\.\\d{2,2})$")
+        }.build()).apply {
+            hint = "##.##"
+            inputType = InputType.TYPE_CLASS_NUMBER
+        }
+
+        bi.llLayout.addView(txtPicker)
     }
 }

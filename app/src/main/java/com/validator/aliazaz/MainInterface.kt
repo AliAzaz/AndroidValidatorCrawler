@@ -10,6 +10,7 @@ interface MainInterface {
     interface viewInterface {
         fun onShowToast(output: Boolean)
         fun onSubmitClick()
+        fun setCustomEditText()
     }
 
     interface presenterInterface {

@@ -27,12 +27,13 @@ Checkout the core functionality from here: ***[AndroidValidatorCrawaler](https:/
 ### Implementation🧨
 In project.gradle add this code it in root build.gradle at the end of repositories:
 ```sh
-allprojects {
-	repositories {
-		...
-		maven { url 'https://jitpack.io' }
+dependencyResolutionManagement {
+		repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+		repositories {
+			mavenCentral()
+			maven { url 'https://jitpack.io' }
+		}
 	}
-}
 ```
 
 Now, add the dependency in app.gradle:

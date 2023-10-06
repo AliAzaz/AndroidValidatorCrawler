@@ -7,7 +7,13 @@ import android.text.TextUtils
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.CheckBox
+import android.widget.EditText
+import android.widget.RadioButton
+import android.widget.RadioGroup
+import android.widget.Spinner
+import android.widget.TextView
+import android.widget.Toast
 import com.edittextpicker.aliazaz.EditTextPicker
 import com.validatorcrawler.aliazaz.utils.ValidatorErrorUtils
 import com.validatorcrawler.aliazaz.utils.getIDComponent
@@ -99,13 +105,13 @@ class Validator {
         ): Boolean {
             var messageConv = ""
             var flag = true
-            if (!(txt as EditTextPicker).isEmptyTextBox) {
+            if (!(txt as EditTextPicker).isEmptyTextBox()) {
                 flag = false
                 messageConv = "ERROR(Empty)"
-            } else if (!txt.isRangeTextValidate) {
+            } else if (!txt.isRangeTextValidate()) {
                 flag = false
                 messageConv = "ERROR(Range)"
-            } else if (!txt.isTextEqualToPattern) {
+            } else if (!txt.isTextEqualToPattern()) {
                 flag = false
                 messageConv = "ERROR(Pattern)"
             }

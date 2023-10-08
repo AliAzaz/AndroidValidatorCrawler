@@ -57,6 +57,18 @@ class MainActivity : AppCompatActivity(), MainInterface.viewInterface {
             inputType = InputType.TYPE_CLASS_NUMBER
         }
 
+        val rangeField = EditTextPicker(this, EditTextPickerBuilder().apply {
+            setRequired(true)
+            setRangeValues(0.5f, 40.0f)
+            setMask("##.##")
+            setPattern("^(\\d{2,2}\\.\\d{2,2})$")
+        }.build()).apply {
+            hint = "##.##"
+            inputType = InputType.TYPE_CLASS_NUMBER
+            id = View.generateViewId()
+        }
+
         bi.llLayout.addView(phoneField)
+        bi.llLayout.addView(rangeField)
     }
 }

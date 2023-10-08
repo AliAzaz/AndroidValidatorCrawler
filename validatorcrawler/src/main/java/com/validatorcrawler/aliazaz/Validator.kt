@@ -38,14 +38,19 @@ class Validator {
                             Toast.LENGTH_SHORT
                         ).show()
                     }
-                    txt.error = "Required"
+                    txt.error = context.resources.getString(R.string.required)
                     txt.requestFocus()
                     Log.i(
-                        context.javaClass.name,
-                        "${context.resources.getResourceEntryName(txt.id)} : Required"
+                        context.javaClass.name, String.format(
+                            context.resources.getString(
+                                R.string.required_log,
+                                context.resources.getResourceEntryName(txt.id)
+                            )
+                        )
                     )
                     false
                 }
+
                 else -> true
             }
         }
@@ -63,14 +68,19 @@ class Validator {
                             Toast.LENGTH_SHORT
                         ).show()
                     }
-                    txt.error = "Required"
+                    txt.error = context.resources.getString(R.string.required)
                     txt.requestFocus()
                     Log.i(
-                        context.javaClass.name,
-                        "${context.resources.getResourceEntryName(txt.id)} : Required"
+                        context.javaClass.name, String.format(
+                            context.resources.getString(
+                                R.string.required_log,
+                                context.resources.getResourceEntryName(txt.id)
+                            )
+                        )
                     )
                     false
                 }
+
                 else -> true
             }
         }
@@ -78,20 +88,15 @@ class Validator {
         @JvmOverloads
         @JvmStatic
         fun emptyCustomTextBox(
-            context: Context,
-            txt: TextView,
-            msg: String,
-            toggleFlag: Boolean = true
+            context: Context, txt: TextView, msg: String, toggleFlag: Boolean = true
         ): Boolean {
             ValidatorErrorUtils.putError(context, txt)
-            if (toggleFlag)
-                Toast.makeText(context, "ERROR: $msg", Toast.LENGTH_SHORT).show()
+            if (toggleFlag) Toast.makeText(context, "ERROR: $msg", Toast.LENGTH_SHORT).show()
             txt.error = msg
             txt.isFocusableInTouchMode = true
             txt.requestFocus()
             Log.i(
-                context.javaClass.name,
-                context.resources.getResourceEntryName(txt.id) + ": " + msg
+                context.javaClass.name, context.resources.getResourceEntryName(txt.id) + ": " + msg
             )
             return false
         }
@@ -99,9 +104,7 @@ class Validator {
         @JvmOverloads
         @JvmStatic
         fun emptyEditTextPicker(
-            context: Context,
-            txt: EditText,
-            toggleFlag: Boolean = true
+            context: Context, txt: EditText, toggleFlag: Boolean = true
         ): Boolean {
             var messageConv = ""
             var flag = true
@@ -127,7 +130,7 @@ class Validator {
                 }
                 Log.i(
                     context.javaClass.name,
-                    "${context.resources.getResourceEntryName(txt.id)} : $messageConv"
+                    "${getString(context, getIDComponent(txt))} : $messageConv"
                 )
                 false
             } else true
@@ -187,8 +190,7 @@ class Validator {
                         Toast.LENGTH_SHORT
                     ).show()
                 }
-                txt.error =
-                    "Range is $min to $max (${type.let { "for $it" }})"
+                txt.error = "Range is $min to $max (${type.let { "for $it" }})"
                 txt.requestFocus()
                 Log.i(
                     context.javaClass.name,
@@ -212,16 +214,22 @@ class Validator {
                             Toast.LENGTH_SHORT
                         ).show()
                     }
-                    (spin.selectedView as TextView).text = "Required"
+                    (spin.selectedView as TextView).text =
+                        context.resources.getString(R.string.required)
                     (spin.selectedView as TextView).setTextColor(Color.RED)
                     spin.isFocusableInTouchMode = true
                     spin.requestFocus()
                     Log.i(
-                        context.javaClass.name,
-                        "${context.resources.getResourceEntryName(spin.id)} : Required"
+                        context.javaClass.name, String.format(
+                            context.resources.getString(
+                                R.string.required_log,
+                                context.resources.getResourceEntryName(spin.id)
+                            )
+                        )
                     )
                     false
                 }
+
                 else -> true
             }
         }
@@ -229,10 +237,7 @@ class Validator {
         @JvmOverloads
         @JvmStatic
         fun emptyRadioButton(
-            context: Context,
-            rdGrp: RadioGroup,
-            rdBtn: RadioButton,
-            toggleFlag: Boolean = true
+            context: Context, rdGrp: RadioGroup, rdBtn: RadioButton, toggleFlag: Boolean = true
         ): Boolean {
             if (rdGrp.checkedRadioButtonId == -1) {
                 ValidatorErrorUtils.putError(context, rdGrp)
@@ -247,8 +252,11 @@ class Validator {
                 rdBtn.isFocusableInTouchMode = true
                 rdBtn.requestFocus()
                 Log.i(
-                    context.javaClass.name,
-                    "${context.resources.getResourceEntryName(rdGrp.id)} : Required"
+                    context.javaClass.name, String.format(
+                        context.resources.getString(
+                            R.string.required_log, context.resources.getResourceEntryName(rdGrp.id)
+                        )
+                    )
                 )
                 return false
             } else {
@@ -260,8 +268,7 @@ class Validator {
                     if (i + 1 == rdGrp.childCount || getIDComponent(checkedRadio) != rdGrp.getChildAt(
                             i + 1
                         ).tag
-                    )
-                        true
+                    ) true
                     else {
                         val v = rdGrp.getChildAt(i + 1)
                         emptyCheckingContainer(context, v, toggleFlag)
@@ -271,8 +278,7 @@ class Validator {
                     rdBtn.error = null
                     rdBtn.clearFocus()
                     true
-                } else
-                    false
+                } else false
 
             }
         }
@@ -280,22 +286,20 @@ class Validator {
         @JvmOverloads
         @JvmStatic
         fun emptyCheckBox(
-            context: Context,
-            cbx: CheckBox,
-            toggleFlag: Boolean = true
+            context: Context, cbx: CheckBox, toggleFlag: Boolean = true
         ): Boolean {
             return when {
                 !cbx.isChecked -> {
                     ValidatorErrorUtils.putError(context, cbx)
                     cbx.error = getString(context, getIDComponent(cbx))
-                    if (toggleFlag)
-                        Toast.makeText(
-                            context,
-                            "ERROR(Empty) ${getString(context, getIDComponent(cbx))}",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                    if (toggleFlag) Toast.makeText(
+                        context,
+                        "ERROR(Empty) ${getString(context, getIDComponent(cbx))}",
+                        Toast.LENGTH_SHORT
+                    ).show()
                     return false
                 }
+
                 else -> true
             }
 
@@ -304,26 +308,23 @@ class Validator {
         @JvmOverloads
         @JvmStatic
         fun emptyMultiCheckBox(
-            context: Context,
-            container: ViewGroup,
-            toggleFlag: Boolean = true
+            context: Context, container: ViewGroup, toggleFlag: Boolean = true
         ): Boolean {
             var flag = false
             var subflag = true
             for (i in 0 until container.childCount) {
                 val v = container.getChildAt(i)
-                if (v is ViewGroup)
-                    if (emptyMultiCheckBox02(context, v)) {
-                        flag = true
-                    } else {
-                        if (ValidatorErrorUtils.error == null) continue
-                        val view =
-                            (context as Activity).findViewById<View>(ValidatorErrorUtils.error!!.id)
-                        if (view !is CheckBox) {
-                            flag = false
-                            break
-                        }
+                if (v is ViewGroup) if (emptyMultiCheckBox02(context, v)) {
+                    flag = true
+                } else {
+                    if (ValidatorErrorUtils.error == null) continue
+                    val view =
+                        (context as Activity).findViewById<View>(ValidatorErrorUtils.error!!.id)
+                    if (view !is CheckBox) {
+                        flag = false
+                        break
                     }
+                }
                 if (v is CheckBox) {
                     v.error = null
 
@@ -331,8 +332,7 @@ class Validator {
                         flag = true
                         continue
                     } else {
-                        if (!flag)
-                            flag = false
+                        if (!flag) flag = false
                     }
 
                     if (v.isChecked) {
@@ -340,8 +340,7 @@ class Validator {
                         if (i + 1 == container.childCount || getIDComponent(v) != container.getChildAt(
                                 i + 1
                             ).tag
-                        )
-                            continue
+                        ) continue
                         subflag =
                             emptyCheckingContainer(context, container.getChildAt(i + 1), toggleFlag)
                         if (!subflag) break
@@ -350,18 +349,18 @@ class Validator {
             }
             if (!flag) {
                 ValidatorErrorUtils.putError(context, container)
-                if (toggleFlag)
-                    Toast.makeText(
-                        context,
-                        "ERROR(Empty)",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                if (toggleFlag) Toast.makeText(
+                    context, "ERROR(Empty)", Toast.LENGTH_SHORT
+                ).show()
                 container.isFocusable = true
                 container.isFocusableInTouchMode = true
                 container.requestFocus()
                 Log.i(
-                    context.javaClass.name,
-                    " ${getIDComponent(container)} :  Required"
+                    context.javaClass.name, String.format(
+                        context.resources.getString(
+                            R.string.required_log, getIDComponent(container)
+                        )
+                    )
                 )
                 return false
             } else if (!subflag) return false
@@ -373,9 +372,7 @@ class Validator {
         @JvmOverloads
         @JvmStatic
         fun emptyCheckingContainer(
-            context: Context,
-            view: View,
-            toggleFlag: Boolean = true
+            context: Context, view: View, toggleFlag: Boolean = true
         ): Boolean {
 
             ValidatorErrorUtils.clearError(context as Activity)
@@ -413,6 +410,7 @@ class Validator {
                     "0" -> if (!emptyMultiCheckBox(context, view, toggleFlag)) {
                         return false
                     }
+
                     else -> {
 
                         loop@ for (i in 0 until view.childCount) {
@@ -431,25 +429,23 @@ class Validator {
         }
 
         private fun emptyMultiCheckBox02(
-            context: Context,
-            container: ViewGroup
+            context: Context, container: ViewGroup
         ): Boolean {
             var flag = false
             var subflag = true
             for (i in 0 until container.childCount) {
                 val v = container.getChildAt(i)
-                if (v is ViewGroup)
-                    if (emptyMultiCheckBox02(context, v)) {
-                        flag = true
-                    } else {
-                        if (ValidatorErrorUtils.error == null) continue
-                        val view =
-                            (context as Activity).findViewById<View>(ValidatorErrorUtils.error!!.id)
-                        if (view !is CheckBox) {
-                            flag = false
-                            break
-                        }
+                if (v is ViewGroup) if (emptyMultiCheckBox02(context, v)) {
+                    flag = true
+                } else {
+                    if (ValidatorErrorUtils.error == null) continue
+                    val view =
+                        (context as Activity).findViewById<View>(ValidatorErrorUtils.error!!.id)
+                    if (view !is CheckBox) {
+                        flag = false
+                        break
                     }
+                }
                 if (v is CheckBox) {
                     v.error = null
 
@@ -457,8 +453,7 @@ class Validator {
                         flag = true
                         continue
                     } else {
-                        if (!flag)
-                            flag = false
+                        if (!flag) flag = false
                     }
 
                     if (v.isChecked) {
@@ -466,8 +461,7 @@ class Validator {
                         if (i + 1 == container.childCount || getIDComponent(v) != container.getChildAt(
                                 i + 1
                             ).tag
-                        )
-                            continue
+                        ) continue
                         subflag =
                             emptyCheckingContainer(context, container.getChildAt(i + 1), false)
                         if (!subflag) break

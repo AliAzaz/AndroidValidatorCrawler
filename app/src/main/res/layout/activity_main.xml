@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".MainActivity">
 
@@ -55,19 +54,9 @@
 
                 <androidx.cardview.widget.CardView style="@style/cardView">
 
-                    <LinearLayout style="@style/linearlayout_view">
-
-                        <com.edittextpicker.aliazaz.EditTextPicker
-                            android:id="@+id/f103"
-                            style="@style/EditText"
-                            android:hint="+92###-###-####"
-                            android:inputType="number"
-                            app:defaultValue=""
-                            app:mask="+92###-###-####"
-                            app:pattern="^(\\+92\\d{3,3}\\-\\d{3,3}\\-\\d{4,4})$"
-                            app:type="equal" />
-
-                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/llLayout"
+                        style="@style/linearlayout_view" />
 
                 </androidx.cardview.widget.CardView>
 
@@ -196,16 +185,6 @@
                             android:text="@string/f106f" />
 
                     </LinearLayout>
-
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView style="@style/cardView">
-
-                    <LinearLayout
-                        android:id="@+id/llLayout"
-                        style="@style/linearlayout_view"
-                        android:orientation="vertical"
-                        android:textColor="@color/colorPrimary" />
 
                 </androidx.cardview.widget.CardView>
 

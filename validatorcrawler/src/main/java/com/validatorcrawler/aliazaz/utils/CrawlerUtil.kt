@@ -1,6 +1,7 @@
 package com.validatorcrawler.aliazaz.utils
 
 import android.content.Context
+import android.content.res.Resources
 import android.view.View
 
 fun getVisibilityFlag(view: View): Boolean {
@@ -13,8 +14,14 @@ fun getString(context: Context, idName: String): String {
 }
 
 fun getIDComponent(view: View): String {
-    val idName = view.resources.getResourceName(view.id)?.split("id/".toRegex())
-        ?.dropLastWhile { it.isEmpty() }
-        ?.toTypedArray()
-    return idName?.get(1) + ""
+    var idName: String? = ""
+    idName = try {
+        view.resources.getResourceName(view.id)?.split("id/".toRegex())
+            ?.dropLastWhile { it.isEmpty() }
+            ?.toTypedArray()?.get(1) + ""
+    } catch (_: Resources.NotFoundException) {
+        ""
+    }
+
+    return idName ?: ""
 }

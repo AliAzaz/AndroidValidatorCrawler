@@ -48,16 +48,15 @@ class MainActivity : AppCompatActivity(), MainInterface.viewInterface {
     }
 
     override fun setCustomEditText() {
-        val txtPicker = EditTextPicker(this, EditTextPickerBuilder().apply {
+        val phoneField = EditTextPicker(this, EditTextPickerBuilder().apply {
             setRequired(true)
-            setRangeValues(0.5f, 40.0f)
-            setMask("##.##")
-            setPattern("^(\\d{2,2}\\.\\d{2,2})$")
+            setMask("+92###-###-####")
+            setEqual("^(\\+92\\d{3,3}\\-\\d{3,3}\\-\\d{4,4})$")
         }.build()).apply {
-            hint = "##.##"
+            hint = "+92###-###-####"
             inputType = InputType.TYPE_CLASS_NUMBER
         }
 
-        bi.llLayout.addView(txtPicker)
+        bi.llLayout.addView(phoneField)
     }
 }

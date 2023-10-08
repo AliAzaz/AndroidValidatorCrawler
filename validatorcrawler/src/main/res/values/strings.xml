@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Validator Crawler X</string>
+
+    <!--Validators errors-->
+    <string name="resource_id_na">View resource ID is not available. Please set it in layout.</string>
+    <string name="required">Required</string>
+    <string name="required_log">Required %s</string>
 </resources>

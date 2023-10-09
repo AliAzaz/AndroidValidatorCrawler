@@ -7,4 +7,5 @@ object DependenciesVersions {
     const val ktxVersion = "1.12.0"
     const val junitVersion = "4.13.2"
     const val cardVersion = "1.0.0"
+    const val editTextPickerVersion = "2.1.1"
 }

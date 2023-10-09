@@ -1,6 +1,6 @@
 object OtherDeps {
     const val editTextPicker =
-        "com.github.AliAzaz:Edittext-Library:release-v2.1_bugs_fixes-SNAPSHOT"
+        "com.github.AliAzaz:Edittext-Library:${DependenciesVersions.editTextPickerVersion}"
 }
 
 object Layouts {

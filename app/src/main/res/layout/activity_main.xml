@@ -56,7 +56,8 @@
 
                     <LinearLayout
                         android:id="@+id/llLayout"
-                        style="@style/linearlayout_view" />
+                        style="@style/EditText"
+                        android:orientation="vertical" />
 
                 </androidx.cardview.widget.CardView>
 

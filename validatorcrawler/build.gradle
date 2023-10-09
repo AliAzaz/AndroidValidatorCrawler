@@ -4,35 +4,18 @@ plugins {
     id 'org.jetbrains.kotlin.android'
 }
 
-ext {
-    build_version = '34.0.0'
-    compile_version = 34
-    target_version = 34
-    min_version = 21
-    versionCode = 2
-    versionName = "2.0.0"
-    kotlin_version = "1.8.0"
-    corektx_version = "1.12.0"
-    appcompat_version = "1.6.1"
-    espresso_version = '3.5.1'
-    junit_version = '4.13.2'
-    junit_ext_version = '1.1.5'
-    edittextpicker_version = '2.0.0'
-    stringlangVersion = '3.12.0'
-}
-
 android {
-    compileSdk compile_version
-    buildToolsVersion = build_version
+    compileSdk ConfigurationData.compileSdkVersion
+    buildToolsVersion = ConfigurationData.buildToolsVersion
     namespace 'com.validatorcrawler.aliazaz'
 
     defaultConfig {
-        minSdkVersion min_version
-        targetSdkVersion target_version
+        minSdkVersion ConfigurationData.minSdkVersion
+        targetSdkVersion ConfigurationData.targetSdkVersion
+        versionCode ConfigurationData.versionCode
+        versionName ConfigurationData.versionName
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles 'consumer-rules.pro'
-
     }
 
     buildTypes {
@@ -43,25 +26,26 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
+
     lint {
         abortOnError false
     }
-
 
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "androidx.core:core-ktx:$corektx_version"
-    implementation "androidx.appcompat:appcompat:$appcompat_version"
-    implementation "org.apache.commons:commons-lang3:$stringlangVersion"
-//    implementation "com.github.AliAzaz:Edittext-Library:$edittextpicker_version"
-    implementation 'com.github.AliAzaz:Edittext-Library:release-v2.1_bugs_fixes-SNAPSHOT'
 
-    testImplementation "junit:junit:$junit_version"
-    androidTestImplementation "androidx.test.ext:junit:$junit_ext_version"
-    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
+    implementation AndroidApp.appCompat
+    implementation AndroidApp.coreKTX
+    implementation AndroidApp.stringLANG
+
+    implementation OtherDeps.editTextPicker
+
+    testImplementation Testing.junit
+    androidTestImplementation Testing.junitImpl
+    androidTestImplementation Testing.expresso
 }

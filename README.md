@@ -45,10 +45,10 @@ dependencies {
 
 ### Sample Usage🔔
 Implement Validation:
-
+```sh
     //fldGrpSecA01: is the view group in which whole layout is defined in xml
     Validator.emptyCheckingContainer(this, fldGrpSecA01);
-
+```
 
 Implement Clear:
 
@@ -56,14 +56,28 @@ Implement Clear:
     Clear.clearAllFields(fldGrpSecA01);
 
 ## OUTPUT📇
+
 ```sh
 Removed required error tag from RadioGroup
 ```
 
 ![](https://github.com/AliAzaz/AndroidValidatorCrawler/blob/master/output.gif)
 
+<br>
+
+## ValidatorBox Gradle Configuration
+
+```
+  validatorBox = 2.0.0
+  gradle = 7.4.2
+  kotlin = 1.8.0
+  build_version = 34.0.0
+  min_api_level = 21
+  max_api_level = 34
+```
 
 ## CONNECT👍
+
 Medium: https://medium.com/@ali.azaz.alam
 
 Twitter: https://twitter.com/AliAzazAlam1

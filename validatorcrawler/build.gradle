@@ -18,6 +18,7 @@ ext {
     junit_version = '4.13.2'
     junit_ext_version = '1.1.5'
     edittextpicker_version = '2.0.0'
+    stringlangVersion = '3.12.0'
 }
 
 android {
@@ -56,6 +57,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "androidx.core:core-ktx:$corektx_version"
     implementation "androidx.appcompat:appcompat:$appcompat_version"
+    implementation "org.apache.commons:commons-lang3:$stringlangVersion"
 //    implementation "com.github.AliAzaz:Edittext-Library:$edittextpicker_version"
     implementation 'com.github.AliAzaz:Edittext-Library:release-v2.1_bugs_fixes-SNAPSHOT'
 

@@ -1,5 +1,6 @@
 package com.validator.aliazaz
 
+import android.os.Build
 import android.os.Bundle
 import android.text.InputType
 import android.view.View
@@ -66,6 +67,9 @@ class MainActivity : AppCompatActivity(), MainInterface.viewInterface {
             hint = "##.##"
             inputType = InputType.TYPE_CLASS_NUMBER
             id = View.generateViewId()
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                setTextAppearance(R.style.EditText)
+            }
         }
 
         bi.llLayout.addView(phoneField)

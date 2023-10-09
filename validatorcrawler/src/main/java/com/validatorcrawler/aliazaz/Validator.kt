@@ -19,6 +19,7 @@ import com.validatorcrawler.aliazaz.utils.ValidatorErrorUtils
 import com.validatorcrawler.aliazaz.utils.getIDComponent
 import com.validatorcrawler.aliazaz.utils.getString
 import com.validatorcrawler.aliazaz.utils.getVisibilityFlag
+import org.apache.commons.lang3.StringUtils
 
 class Validator {
 
@@ -106,7 +107,7 @@ class Validator {
         fun emptyEditTextPicker(
             context: Context, txt: EditText, toggleFlag: Boolean = true
         ): Boolean {
-            var messageConv = ""
+            var messageConv = StringUtils.EMPTY
             var flag = true
             if (!(txt as EditTextPicker).isEmptyTextBox()) {
                 flag = false
